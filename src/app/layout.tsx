@@ -6,6 +6,7 @@ import "./globals.css"
 import Transition from "@/components/blocks/Transition"
 import Header from "@/components/layout/Header"
 import Providers from "@/components/layout/Providers"
+import { Session } from "next-auth"
 
 const jost = Jost({
   weight: ["400", "500", "600", "700"],
@@ -20,13 +21,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  session
 }: Readonly<{
   children: React.ReactNode;
+  session: Session | null;
 }>) {
   return (
     <html lang="en">
       <body className={jost.className}>
-        <Providers>
+        <Providers session={session}>
           <Header />
           <main>
             <Transition>{children}</Transition>
