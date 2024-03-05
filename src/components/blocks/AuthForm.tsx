@@ -110,7 +110,7 @@ const AuthForm: FC<AuthForm> = ({ hasAccount, setHasAccount, inputs, buttonText,
       </div>
       {hasAccount && !forgetPassword ? (
         <div className="flex justify-between items-center text-primary-500">
-          <Checkbox label={<Typography>Remember Me</Typography>} containerProps={{ className: "-ml-3" }} />
+          <Checkbox label={<Typography>Remember Me</Typography>} containerProps={{ className: "-ml-3" }} crossOrigin={undefined} />
           <Typography className="text-sm cursor-pointer" onClick={setForgetPassword}>
             Forgot Password?
           </Typography>
