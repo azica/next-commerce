@@ -1,27 +1,15 @@
 "use client"
 
 import { Typography } from "@material-tailwind/react"
-import { useEffect, useState } from "react"
 
-import { useAllProducts } from "@/apollo/products"
+import { useAllProducts } from "@/services/getProducts"
 
 import ProductCard from "./ProductCard"
 import Container from "../layout/Container"
 
 const Slider = () => {
-  const [products, setProducts] = useState<Model.Product[]>([])
-
-  const { loading, error, data } = useAllProducts({
-    limit: 8,
-    offset: 1,
-  })
-
-  useEffect(() => {
-    if (data) {
-      setProducts(data.products)
-    }
-  }, [data])
-  // console.log(data);
+  const { products, isLoading, error } = useAllProducts<Model.Product[]>()
+  console.log(products)
 
   return (
     <Container className="py-10">
@@ -31,7 +19,7 @@ const Slider = () => {
         </Typography>
       </div>
       <div className="grid gap-4 grid-cols-4">
-        {products.map((item, idx) => (
+        {products?.map((item, idx) => (
           <div key={idx} className="w-full">
             <ProductCard {...item} />
           </div>

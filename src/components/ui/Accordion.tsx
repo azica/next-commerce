@@ -1,4 +1,5 @@
-import type { ReactNode } from "react"
+"use client"
+
 import {
   ListItem,
   AccordionHeader,
@@ -7,19 +8,21 @@ import {
   Accordion as MaterialAccordion,
 } from "@material-tailwind/react"
 import { ChevronDownSmall } from "akar-icons"
-import React from "react"
+import { useState, type ReactNode } from "react"
 
 const Accordion = ({
-  open,
-  handleOpen,
   title,
   children,
 }: {
-  open: boolean;
-  handleOpen: () => void;
   title: string;
   children: ReactNode;
 }) => {
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(!open)
+  }
+
   return (
     <MaterialAccordion
       open={open}
@@ -31,7 +34,7 @@ const Accordion = ({
         />
       }>
       <ListItem className="p-0" selected={open}>
-        <AccordionHeader onClick={() => handleOpen(1)} className="border-b-0 p-3">
+        <AccordionHeader onClick={handleOpen} className="border-b-0 p-3">
           <Typography className="mr-auto font-semibold">{title}</Typography>
         </AccordionHeader>
       </ListItem>

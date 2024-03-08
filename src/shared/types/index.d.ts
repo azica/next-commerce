@@ -12,7 +12,7 @@ export declare global {
 
   type ErrorResponse = {
     status: number;
-    data: { message: string; errors: ErrorObject[] };
+    message: string;
   };
 
   type Routes = {

@@ -31,7 +31,14 @@ module.exports = withMT({
           500: "#d9e1e1",
         },
       },
+      typography: {
+        h1: {
+          fontWeight: 'bold', // Example font weight for h1
+          lineHeight: 'normal', 
+          fontSize: '1.5rem'// Example line height for h1
+        },
+      },
     },
   },
-  plugins: [],
+  plugins: [ ],
 })

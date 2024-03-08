@@ -15,11 +15,12 @@ const Pagination = ({ totalCount = 5 }: { totalCount?: number }) => {
   const clickHandle = (page: number) => {
     setActive(page)
     router.push(`${pathname}${separator}${createQueryString("page", page)}`)
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   const getItems = () => {
     const items = []
-    for (let index = 1;index < totalCount + 1;index++) {
+    for (let index = 1; index < totalCount + 1; index++) {
       items.push(
         <IconButton
           variant="outlined"

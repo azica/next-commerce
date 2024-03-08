@@ -1,12 +1,16 @@
-import type { Metadata } from "next"
 
+// eslint-disable-next-line import/order
 import { Jost } from "next/font/google"
 
 import "./globals.css"
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { Metadata } from "next/types";
+import { Session } from "next-auth"
+
 import Transition from "@/components/blocks/Transition"
 import Header from "@/components/layout/Header"
 import Providers from "@/components/layout/Providers"
-import { Session } from "next-auth"
 
 const jost = Jost({
   weight: ["400", "500", "600", "700"],

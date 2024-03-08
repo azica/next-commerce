@@ -1,8 +1,8 @@
 "use client"
 
-import { signIn } from "next-auth/react"
-import { useSearchParams } from "next/navigation"
 import { Button } from "@material-tailwind/react"
+import { useSearchParams } from "next/navigation"
+import { signIn } from "next-auth/react"
 
 const GoogleButton = () => {
   const searchParams = useSearchParams()

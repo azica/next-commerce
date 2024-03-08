@@ -28,13 +28,13 @@ const Sort = () => {
   }
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between w-full">
       <div className="flex-1 flex items-center gap-3">
         <Grid strokeWidth={1.5} size={25} />
         <SettingsHorizontal strokeWidth={1.5} size={25} />
         <Typography className="font-medium">Showing 1-16 of 72 results</Typography>
       </div>
-      <div>
+      <div className="max-w-[300px]">
         <Select variant="static" value={value} onChange={(val) => changeHandle(String(val))}>
           {filter?.map((option) => (
             <Option key={option.value} value={option.value}>

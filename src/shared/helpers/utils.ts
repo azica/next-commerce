@@ -1,4 +1,4 @@
-import { API_URL } from "@/apollo/contstants";
+import { API_URL } from "../constants";
 
 export const getRefreshToken = async (refreshToken: string) => {
     try {
@@ -24,4 +24,25 @@ export const getRefreshToken = async (refreshToken: string) => {
         console.error("Error refreshing token:", error);
         throw error;
     }
+};
+
+
+export const getQueryString = (searchParams: URLSearchParams): string => {
+    const paramsObj: Record<string, string> = {offset: "0", limit: "15", };
+    for (const [key, value] of Array.from(searchParams.entries())) {
+        if( key === "page") {
+            paramsObj.offset = String(Number(value) * 6)
+        } else {
+            paramsObj[key] = value;
+        }     
+    }
+    return new URLSearchParams(paramsObj).toString();
+  };
+  
+ export const fetcher = async <T>(url: string): Promise<T> => {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json();
 };

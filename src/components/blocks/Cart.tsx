@@ -5,9 +5,14 @@ import { Fragment, useEffect, useState } from "react"
 
 const Cart = ({ open, toggleDrawer }: { open: boolean; toggleDrawer: () => void }) => {
   const [subtotal, setSubtotal] = useState(0)
-  const [cartList, setCartList] = useState<({ quantity: number } & Model.Product)[]>(
-    JSON.parse(localStorage.getItem("cartList") || "[]"),
-  )
+  const [cartList, setCartList] = useState<({ quantity: number } & Model.Product)[]>([])
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const cartListFromLocalStorage = localStorage.getItem("cartList") || "[]"
+      setCartList(JSON.parse(cartListFromLocalStorage))
+    }
+  }, [])
 
   const deleteFromCartHandle = (id: number) => {
     const updatedCartList = cartList.filter((item) => item.id !== id)

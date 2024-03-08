@@ -2,15 +2,14 @@
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+
 import logo from "@/assets/images/Logo.png"
 
 import Container from "./Container"
 import HeaderActions from "./HeaderActions"
-import { useGetMe } from "@/apollo/user"
 
 const Header = () => {
   const pathname = usePathname()
-  const { data, error } = useGetMe()
   const showHeader = pathname === "/signin"
   if (showHeader) {
     return null
@@ -39,11 +38,11 @@ const Header = () => {
           <Link className="font-medium text-base" href="/contact-us">
             Contact Us
           </Link>
-          {data ? (
+          {/* {data ? (
             <Link className="font-medium text-base" href="/profile">
               hi {data.myProfile.name}
             </Link>
-          ) : null}
+          ) : null} */}
         </nav>
         <HeaderActions />
       </Container>

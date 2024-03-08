@@ -1,31 +1,26 @@
-import ProductList from "@/components/blocks/ProductList"
-import { Suspense } from "react"
 
-import Filters from "@/components/blocks/Filters"
-import Pagination from "@/components/blocks/Pagination"
-import Sort from "@/components/blocks/Sort"
-import Loading from "./loading"
-import { Metadata } from "next"
+import { Suspense } from "react";
 
-export const metadata: Metadata = {
-  title: "Shop | Next App",
-};
+import Filters from "@/components/blocks/Filters";
+import Pagination from "@/components/blocks/Pagination";
+import ProductList from "@/components/blocks/ProductList";
+import Sort from "@/components/blocks/Sort";
+import Spinner from "@/components/blocks/Spinner";
+import SideMenu from "@/components/layout/SideMenu";
 
-const Shop = () => {
-
+export default async function Shop() {
   return (
-    <>
-      <div className="">
+    <div className="flex gap-10 min-h-screen w-full">
+      <SideMenu>
         <Filters />
-      </div>
-      <div className="flex-1 mt-4 pt-1">
+      </SideMenu>
+      <div className="mt-4 pt-1 flex flex-col gap-4 justify-between items-center w-full">
         <Sort />
-        <div className="mt-8">
-          <Suspense fallback={<Loading />}><ProductList /></Suspense>
-          <Pagination />
-        </div>
+        <Suspense fallback={<Spinner />}>
+          <ProductList />
+        </Suspense >
+        <Pagination />
       </div>
-    </>
+    </div>
   )
 }
-export default Shop

@@ -1,6 +1,6 @@
 "use client"
 import { Button, Card, CardBody, Typography } from "@material-tailwind/react"
-import React from "react"
+import Image from "next/image"
 
 import SocialLinks from "./SocialLinks"
 
@@ -31,6 +31,7 @@ const ProductCard = ({
     <Card className={`group/item hover:bg-gray-100 transition-all duration-300 w-full cursor-pointer ${className}`}>
       <div className="relative">
         {images.length > 0 ? <img src={images[0].replace(/^["\\[]|["\\]$/g, "").replace(/^"/, "")} alt={title} /> : null}
+        {/* {images.length > 0 ? <Image src={images[0].replace(/^["\\[]|["\\]$/g, "").replace(/^"/, "")} alt={title} layout="fill" objectFit="cover" /> : null} */}
         <div className="transition-all duration-300 invisible flex flex-col gap-5 text-black absolute top-4 right-3 group-hover/item:visible">
           <SocialLinks />
         </div>
