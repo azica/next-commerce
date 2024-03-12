@@ -6,7 +6,7 @@ const tableHead = ["Products", "", "Price", "Quantity", "Subtotal", ""]
 const CheckoutItems = (
     { cartList, deleteHandle, changeHandle }:
         {
-            cartList: { quantity: number } & Model.Product[]; deleteHandle: (id: numver) => void;
+            cartList: { quantity: number } & Model.Product[]; deleteHandle: (id: number) => void;
             changeHandle: (id: number, operation: string) => void
         }
 ) => {

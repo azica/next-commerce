@@ -53,12 +53,11 @@ const Checkout = () => {
 
     return (
         <Container>
-            <h2 className="mb-10">Checkout</h2>
             <div className="flex gap-10">
                 <div className="w-2/3">
-                    <Typography variant="h5" className="text-center text-purple-500 font-medium my-4 pb-4">
+                    {/* <Typography variant="h5" className="text-center text-purple-500 font-medium my-4 pb-4">
                         You have {cartList.length} item{cartList.length !== 1 ? "s" : ""} in your cart
-                    </Typography>
+                    </Typography> */}
                     {/* <CheckoutItems cartList={cartList} deleteHandle={deleteFromCartHandle} changeHandle={changeHandle} /> */}
                     <CheckoutSteps />
 

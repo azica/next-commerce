@@ -34,7 +34,7 @@ export default function RootLayout({
       <body className={jost.className}>
         <Providers session={session}>
           <Header />
-          <main>
+          <main className="min-h-screen">
             <Transition>{children}</Transition>
           </main>
         </Providers>
