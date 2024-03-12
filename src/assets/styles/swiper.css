@@ -1,0 +1,35 @@
+@import 'swiper/css';
+@import 'swiper/css/grid';
+@import 'swiper/css/pagination';
+@import 'swiper/css/free-mode';
+@import 'swiper/css/navigation';
+@import 'swiper/css/thumbs';
+
+.myswipe .swiper-wrapper {
+    align-items: stretch;
+}
+.myswipe .swiper-slide{
+    flex-grow: 1;
+    display: flex!important;
+}
+.twoRowsSlider  {
+    width: 100%;
+    height: 100%;
+  }
+  
+.swiperThumbs {
+    box-sizing: border-box;
+    padding: 10px 0;
+}
+
+.swiperThumbs .swiper-slide {
+    width: 25%;
+    height: 100%;
+    opacity: 0.4;
+}
+
+.swiperThumbs .swiper-slide-thumb-active {
+opacity: 1;
+}
+
+  

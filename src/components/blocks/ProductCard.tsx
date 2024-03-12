@@ -28,9 +28,9 @@ const ProductCard = ({
   }
 
   return (
-    <Card className={`group/item hover:bg-gray-100 transition-all duration-300 w-full cursor-pointer ${className}`}>
-      <div className="relative">
-        {images.length > 0 ? <img src={images[0].replace(/^["\\[]|["\\]$/g, "").replace(/^"/, "")} alt={title} /> : null}
+    <Card className={`group/item hover:bg-gray-100 transition-all duration-300 w-full cursor-pointer h-full ${className}`}>
+      <div className="relative h-[275px]">
+        {images.length > 0 ? <img src={images[0].replace(/^["\\[]|["\\]$/g, "").replace(/^"/, "")} alt={title} className="w-full h-full object-cover" /> : null}
         {/* {images.length > 0 ? <Image src={images[0].replace(/^["\\[]|["\\]$/g, "").replace(/^"/, "")} alt={title} layout="fill" objectFit="cover" /> : null} */}
         <div className="transition-all duration-300 invisible flex flex-col gap-5 text-black absolute top-4 right-3 group-hover/item:visible">
           <SocialLinks />
@@ -41,14 +41,14 @@ const ProductCard = ({
           </Button>
         </div>
       </div>
-      <CardBody>
+      <CardBody className="text-left">
         <Typography as="a" variant="h6" className="mb-2 font-semibold text-black text-base" href={`/shop/${id}`}>
           {title}
         </Typography>
         <Typography variant="h6" className="mb-2 font-normal text-black">
           {category.name}
         </Typography>
-        <Typography className="text-purple">{price} $</Typography>
+        <Typography className="text-purple">{price.toFixed(2)} $</Typography>
       </CardBody>
     </Card>
   )

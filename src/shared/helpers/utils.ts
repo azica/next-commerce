@@ -27,8 +27,8 @@ export const getRefreshToken = async (refreshToken: string) => {
 };
 
 
-export const getQueryString = (searchParams: URLSearchParams): string => {
-    const paramsObj: Record<string, string> = {offset: "0", limit: "15", };
+export const getQueryString = (searchParams: URLSearchParams, limit?: string): string => {
+    const paramsObj: Record<string, string> = {offset: "0", limit: limit || "15", };
     for (const [key, value] of Array.from(searchParams.entries())) {
         if( key === "page") {
             paramsObj.offset = String(Number(value) * 6)

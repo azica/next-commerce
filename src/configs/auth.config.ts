@@ -26,7 +26,6 @@ export const authConfig: AuthOptions = {
   
         console.log(user)
         if (res.ok && user) {
-          
           return user
         }
         return null
@@ -53,7 +52,6 @@ export const authConfig: AuthOptions = {
         }
         return null
       },
-  
     }),
   ],
   pages: {
@@ -61,7 +59,31 @@ export const authConfig: AuthOptions = {
   },
   callbacks: {
     async jwt({ token, user, account }) {
-      return { ...token, ...user };
+      // If the token is expired, refresh it
+      if (user && token && Math.floor(Date.now() / 1000) > (token.exp - 60)) {
+        try {
+          const res = await fetch("URL_TO_REFRESH_TOKEN_ENDPOINT", {
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/json",
+              // Add your authorization header if needed
+            },
+            body: JSON.stringify({ refreshToken: token.refreshToken }), // Send the refresh token
+          })
+          const data = await res.json()
+          if (res.ok && data) {
+            // Update the token with the refreshed one
+            return {
+              ...token,
+              ...data
+            }
+          }
+        } catch (error) {
+          // Handle error
+          console.error("Error refreshing token:", error)
+        }
+      }
+      return token
     },
     async session({ session, token, user }) {
       session.user = token as Response.Tokens & Model.User

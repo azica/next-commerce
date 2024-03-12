@@ -7,8 +7,7 @@ export async function GET(req: NextRequest, res: Response) {
   try {
     const param = req.nextUrl.searchParams
     const searchParams = new URLSearchParams(req.url.split('?')[1] ?? '');
-
-console.log(param)
+    
     const response = await fetch(`${API_URL}/products?${searchParams}`);
 
     if (!response.ok) {

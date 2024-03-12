@@ -4,12 +4,12 @@ import useSWR, { SWRResponse } from "swr";
 
 import { fetcher, getQueryString } from '@/shared/helpers/utils';
 
-export const useAllProducts = <T>({limit}:{ limit?: string } = {}) => {
+export const useGetProfile = <T>() => {
   const searchParams = useSearchParams();
-  const currentQueryString = getQueryString(searchParams, limit);
+  const currentQueryString = getQueryString(searchParams);
 
   const { data, error, isLoading }: SWRResponse<unknown, ErrorResponse> = useSWR(
-    `/api/products?${currentQueryString}`,
+    `/api/me?${currentQueryString}`,
     fetcher,
     { suspense: true }
   );
@@ -20,4 +20,3 @@ export const useAllProducts = <T>({limit}:{ limit?: string } = {}) => {
     error
   };
 };
-

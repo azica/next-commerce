@@ -25,7 +25,7 @@ const Cart = ({ open, toggleDrawer }: { open: boolean; toggleDrawer: () => void 
   }, [cartList])
 
   return (
-    <Drawer open={open} onClose={toggleDrawer} placement="right">
+    <Drawer open={open} onClose={toggleDrawer} placement="right" className="thumb pb-10">
       <Typography variant="h5" className="text-center text-purple-500 font-medium my-4">
         You have {cartList.length} item{cartList.length !== 1 ? "s" : ""} in your cart
       </Typography>

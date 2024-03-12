@@ -9,6 +9,7 @@ import Container from "./Container"
 import HeaderActions from "./HeaderActions"
 
 const Header = () => {
+
   const pathname = usePathname()
   const showHeader = pathname === "/signin"
   if (showHeader) {
@@ -22,20 +23,20 @@ const Header = () => {
           <Image src={logo} alt="logo" />
         </Link>
         <nav className="flex gap-4 justify-center capitalize my-3 flex-grow-1">
-          <Link className="font-medium text-base" href="/">
+          <Link className="font-medium" href="/">
             Home
           </Link>
-          <Link className="font-medium text-base" href="/shop">
+          <Link className="font-medium" href="/shop">
             Shop
           </Link>
-          <Link className="font-medium text-base" href="/our-story">
+          <Link className="font-medium" href="/our-story">
             Our Story
           </Link>
-          <Link className="font-medium text-base" href="/blog">
+          <Link className="font-medium" href="/blog">
             Blog
           </Link>
 
-          <Link className="font-medium text-base" href="/contact-us">
+          <Link className="font-medium" href="/contact-us">
             Contact Us
           </Link>
           {/* {data ? (

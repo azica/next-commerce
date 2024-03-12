@@ -5,7 +5,9 @@ module.exports = withMT({
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Jost", "sans-serif"],
+        sans: ['var(--font-jost)'],
+        serif: ['var(--font-jost)'],
+        body: ['var(--font-jost)'],
       },
       colors: {
         primary: {
@@ -13,7 +15,6 @@ module.exports = withMT({
           200: "#8d8a94",
           500: "#131118",
         },
-        black: "#020617",
         purple: {
           400: "#cd0d9b",
           500: "#b21589",

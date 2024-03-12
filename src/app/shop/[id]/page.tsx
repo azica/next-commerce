@@ -1,7 +1,7 @@
 import { Star } from "akar-icons";
 import { Metadata } from "next/types";
 
-import ImageSlider from "@/components/blocks/ImageSlider";
+import ThumbsGallery from "@/components/blocks/ThumbsGallery";
 import ColorsList from "@/components/ui/ColorsList";
 import SizeList from "@/components/ui/SizeList";
 import { API_LOCALHOST_URL } from "@/shared/constants";
@@ -39,7 +39,7 @@ const ProductDetail = async ({ params: { id } }: Props) => {
   return <>
     <div className="flex gap-8 my-20 w-full">
       <div className="overflow-hidden relative w-1/2 relative min-h-[400px]">
-        <ImageSlider images={product.images} />
+        <ThumbsGallery images={product.images} />
       </div>
       <div className="w-1/2">
         <h3>Product Detail {product.title}</h3>

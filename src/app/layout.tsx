@@ -2,9 +2,8 @@
 // eslint-disable-next-line import/order
 import { Jost } from "next/font/google"
 
-import "./globals.css"
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import "../assets/styles/globals.css"
+
 import { Metadata } from "next/types";
 import { Session } from "next-auth"
 

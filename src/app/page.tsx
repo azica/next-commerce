@@ -1,11 +1,13 @@
+import BestSeller from "@/components/blocks/BestSeller"
 import Hero from "@/components/blocks/Hero"
-import Slider from "@/components/blocks/Slider"
+import ShopByCategories from "@/components/blocks/ShopByCategories"
 
 const Home = () => {
   return (
     <main className="">
       <Hero />
-      <Slider />
+      <ShopByCategories />
+      <BestSeller />
     </main>
   )
 }
