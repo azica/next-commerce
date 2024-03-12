@@ -1,4 +1,4 @@
-import type { ReactNode, FC, SyntheticEvent } from "react"
+import type { ReactNode, SyntheticEvent } from "react"
 declare global {
   type ButtonPreloader = {
     loading: boolean;
@@ -33,7 +33,10 @@ declare global {
       value: number;
       message: string;
     };
-    pattern?: RegExp;
+    pattern?: {
+      value: RegExp;
+      message: string;
+    };
   };
 
   type InputData = {
@@ -48,6 +51,7 @@ declare global {
     placeholder?: string;
     readOnly?: boolean;
     invalid?: boolean;
+    required?: boolean;
     options?: {
       id?: number | string;
       name: string;
@@ -85,13 +89,12 @@ declare global {
   };
 
   type InputOnChange = {
-    (value: { field: string; value: string | number; id: number | string; suggestion?: { [name: string]: any } }): void;
+    (value: { field: string; value: string | number; id: number | string; }): void;
   };
 
   type Input = {
     endAdornment?: ReactNode;
     startAdornment?: ReactNode;
     onChange: InputOnChange;
-    onKeyDown?: (event: any) => void;
   } & InputData;
 }

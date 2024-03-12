@@ -2,7 +2,7 @@
 
 import { Stepper, Step, Button, Typography } from "@material-tailwind/react";
 import { HomeAlt1, CreditCardAlt1, Receipt } from "akar-icons";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 
 import Payment from "./Payment";
 import Review from "./Review";

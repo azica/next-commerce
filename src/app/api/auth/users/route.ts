@@ -3,9 +3,9 @@ import { NextRequest } from "next/server";
 import { API_URL } from "@/shared/constants";
 
 
-export async function POST(req: NextRequest, res: Response) {      
+export async function POST(req: NextRequest) {      
   try {
-    const param = req.nextUrl.searchParams
+    // const param = req.nextUrl.searchParams
     const searchParams = new URLSearchParams(req.url.split('?')[1] ?? '');
 
     const response = await fetch(`${API_URL}/products?${searchParams}`);

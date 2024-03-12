@@ -4,7 +4,7 @@ import { useAllProducts } from "@/services/getProducts";
 import ProductCard from "./ProductCard";
 
 const ProductList = () => {
-  const { products, isLoading, error } = useAllProducts<Model.Product[]>();
+  const { products } = useAllProducts<Model.Product[]>();
 
   if (!products) {
     <h2> There is not products</h2>

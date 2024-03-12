@@ -165,7 +165,6 @@ export const paymentData:Record<string, InputData[]> = {
       field: "cardName",
       placeholder: "Card Name",
       type: "text",
-      required: true,
       label: "Card Name",
       autoComplete: "off",
       validations: {

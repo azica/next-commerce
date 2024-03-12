@@ -1,5 +1,6 @@
 "use client"
 import { Input, Radio, Typography, Button } from "@material-tailwind/react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { paymentData, paymentMethods } from "@/shared/mockdata/mockdata"
@@ -27,8 +28,8 @@ const Payment = () => {
         >
             Select a delivery address
         </Typography>
-        <form>
-            <div className="flex flex-col mb-3">
+        <form className={handleSubmit}>
+            <div className="flex flex-col">
                 {paymentMethods.map((input, idx) => (
                     <Radio
                         name={input.value}
@@ -39,7 +40,7 @@ const Payment = () => {
                         onChange={() => setPaymentMethod(e.value)} />
                 ))}
             </div>
-            <div className="flex gap-2 flex-col">
+            <div className="flex gap-2 flex-col mb-5">
                 {paymentData[paymentMethod]?.map((input) => (
                     <div key={input.id} className="relative">
                         <Typography className="mb-2 font-medium text-xs text-primary-500">{input.label}</Typography>

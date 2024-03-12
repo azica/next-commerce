@@ -1,5 +1,3 @@
-import { red, gray1, white, black, green, gray2 } from "./colors"
-
 export const customTheme = {
   button: {
     styles: {

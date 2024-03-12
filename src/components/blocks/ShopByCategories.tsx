@@ -10,7 +10,7 @@ import ProductCard from "./ProductCard"
 import Container from "../layout/Container"
 
 const ShopByCategories = () => {
-  const { products, isLoading, error } = useAllProducts<Model.Product[]>()
+  const { products } = useAllProducts<Model.Product[]>()
 
   return (
     <Container className="py-16">

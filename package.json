@@ -26,6 +26,7 @@
     "@types/react": "^18.2.19",
     "@types/react-dom": "^18",
     "@types/react-slick": "^0.23.13",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
     "akar-icons": "^1.9.30",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",

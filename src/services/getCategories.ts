@@ -2,7 +2,7 @@
 import useSWR, { SWRResponse } from "swr";
 
 export const useAllCategories = () => {
-  const { data, error, isLoading }: SWRResponse<Model.Category[], ErrorResponse> = useSWR("categories", getAllCategories);
+  const { data, error }: SWRResponse<Model.Category[], ErrorResponse> = useSWR("categories", getAllCategories);
   
   return {
     categories: data,
