@@ -3,6 +3,7 @@ import { Button, Card, Typography } from "@material-tailwind/react";
 import { useState, useEffect } from "react";
 
 import CheckoutItems from "@/components/blocks/CheckoutItems"
+import CheckoutSteps from "@/components/blocks/CheckoutSteps";
 import Container from "@/components/layout/Container";
 
 const Checkout = () => {
@@ -44,7 +45,7 @@ const Checkout = () => {
                 }
                 return el;
             })
-            .filter((item) => item && item.quantity !== 0) as ({ quantity: number } & Model.Product)[]; // Filter out null and items with quantity 0
+            .filter((item) => item && item.quantity !== 0) as ({ quantity: number } & Model.Product)[];
 
         setCartList(updatedCartList);
         localStorage.setItem("cartList", JSON.stringify(updatedCartList));
@@ -58,7 +59,9 @@ const Checkout = () => {
                     <Typography variant="h5" className="text-center text-purple-500 font-medium my-4 pb-4">
                         You have {cartList.length} item{cartList.length !== 1 ? "s" : ""} in your cart
                     </Typography>
-                    <CheckoutItems cartList={cartList} deleteHandle={deleteFromCartHandle} changeHandle={changeHandle} />
+                    {/* <CheckoutItems cartList={cartList} deleteHandle={deleteFromCartHandle} changeHandle={changeHandle} /> */}
+                    <CheckoutSteps />
+
                 </div>
                 <div className="w-1/3">
                     <Card className="p-5">

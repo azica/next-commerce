@@ -1,6 +1,6 @@
 "use client"
 
-import { Stepper, Step, Button } from "@material-tailwind/react";
+import { Stepper, Step, Button, Typography } from "@material-tailwind/react";
 import { HomeAlt1, CreditCardAlt1, Receipt } from "akar-icons";
 import { useState } from "react";
 
@@ -22,6 +22,20 @@ const CheckoutSteps = () => {
             >
                 <Step onClick={() => setActiveStep(0)}>
                     <HomeAlt1 strokeWidth={1.5} size={20} />
+                    <div className="absolute -bottom-[4.5rem] w-max text-center">
+                        <Typography
+                            variant="h6"
+                            color={activeStep === 0 ? "blue-gray" : "gray"}
+                        >
+                            Step 1
+                        </Typography>
+                        <Typography
+                            color={activeStep === 0 ? "blue-gray" : "gray"}
+                            className="font-normal"
+                        >
+                            Details about yout account.
+                        </Typography>
+                    </div>
                 </Step>
                 <Step onClick={() => setActiveStep(1)}>
                     <CreditCardAlt1 strokeWidth={1.5} size={20} />

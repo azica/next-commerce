@@ -13,9 +13,6 @@ export default function AboutLayot({ children }: { children: ReactNode }) {
     <div>
       <ul>
         <li>
-          <Link href="/about/contact">Contacts</Link>
-        </li>
-        <li>
           <Link href="/about/team">Team</Link>
         </li>
       </ul>
