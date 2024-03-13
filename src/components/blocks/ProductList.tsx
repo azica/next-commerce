@@ -10,7 +10,7 @@ import ProductCard from "./ProductCard";
 const ProductList = () => {
   const { products } = useAllProducts<Model.Product[]>();
 
-  if (!products || products.length < 0) {
+  if (!products || !products.length) {
     return <h2> There are no products</h2>;
   }
 

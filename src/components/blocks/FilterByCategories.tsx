@@ -1,7 +1,7 @@
 "use client"
 import { List, ListItem, ListItemPrefix, Typography, Radio } from "@material-tailwind/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useState } from "react";
+import { useState } from "react";
 
 import { useAllCategories } from "@/services/getCategories";
 
@@ -26,29 +26,27 @@ const FilterByCategories = () => {
   }
 
   return (
-    <Suspense>
-      <List className="p-0">
-        {categories?.map((el, idx) => (
-          <ListItem className="p-0" key={idx}>
-            <label htmlFor={el} className="flex w-full cursor-pointer items-center px-3 py-2">
-              <ListItemPrefix className="mr-3">
-                <Radio
-                  name={el}
-                  id={el}
-                  onChange={() => changeHandle(el)}
-                  className="hover:before:opacity-0"
-                  containerProps={{
-                    className: "p-0 text-purple-600",
-                  }}
-                  checked={el === activeCategory}
-                />
-              </ListItemPrefix>
-              <Typography className="font-medium capitalize">{el}</Typography>
-            </label>
-          </ListItem>
-        ))}
-      </List>
-    </Suspense>
+    <List className="p-0">
+      {categories?.map((el, idx) => (
+        <ListItem className="p-0" key={idx}>
+          <label htmlFor={el} className="flex w-full cursor-pointer items-center px-3 py-2">
+            <ListItemPrefix className="mr-3">
+              <Radio
+                name={el}
+                id={el}
+                onChange={() => changeHandle(el)}
+                className="hover:before:opacity-0"
+                containerProps={{
+                  className: "p-0 text-purple-600",
+                }}
+                checked={el === activeCategory}
+              />
+            </ListItemPrefix>
+            <Typography className="font-medium capitalize">{el}</Typography>
+          </label>
+        </ListItem>
+      ))}
+    </List>
   );
 };
 

@@ -12,6 +12,10 @@ import Container from "../layout/Container"
 const ShopByCategories = () => {
   const { products } = useAllProducts<Model.Product[]>()
 
+  if (!products || !products.length) {
+    return <h2> There are no products</h2>;
+  }
+
   return (
     <Container className="py-16">
       <div className="flex items-center justify-between">

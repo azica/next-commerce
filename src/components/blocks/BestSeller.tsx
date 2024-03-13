@@ -14,6 +14,10 @@ import Container from "../layout/Container"
 const BestSeller = () => {
     const { products, isLoading, error } = useAllProducts<Model.Product[]>({ limit: "30" })
 
+    if (!products || !products.length) {
+        return <h2> There are no products</h2>;
+    }
+
     return (
         <Container className="py-16">
             <Typography variant="h2" className="mb-4 font-medium text-center">
