@@ -2,7 +2,7 @@ import { API_URL } from "@/shared/constants";
 
 export async function GET(req: Request, res: Response) {      
   try {
-    const response = await fetch(`${API_URL}/categories`) 
+    const response = await fetch(`${process.env.NEXT_DAMMY_API}/products/categories`) 
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }

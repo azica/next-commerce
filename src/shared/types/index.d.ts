@@ -1,4 +1,17 @@
+import { FC } from "react";
+
 export declare global {
+  type size = "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
+
+  type Modal = FC<{
+    open: boolean;
+    handleOpen: () => void;
+    size?: size;
+    header?: string;
+    children: ReactNode;
+    footer?: string
+  }>;
+
   type ResponseSuccess = {
     status: string;
     message: string;
@@ -33,20 +46,21 @@ export declare global {
       password: string;
       id?: number;
       avatar?: string;
-      role?:string;
+      role?: string;
     };
 
-    type Category = {
-      id: number;
-      name: string;
-    };
     type Product = {
       id: number;
       title: string;
       price: number;
-      category: Model.Category;
+      category: string;
       description: string;
-      images: string[];
+      thumbnail?: string;
+      images?: string[];
+      brand?: string;
+      stock?: number;
+      discountPercentage?: number;
+      rating?: number;
     };
   }
 

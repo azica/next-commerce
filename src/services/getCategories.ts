@@ -2,7 +2,7 @@
 import useSWR, { SWRResponse } from "swr";
 
 export const useAllCategories = () => {
-  const { data, error }: SWRResponse<Model.Category[], ErrorResponse> = useSWR("categories", getAllCategories);
+  const { data, error }: SWRResponse<string[], ErrorResponse> = useSWR("categories", getAllCategories);
   
   return {
     categories: data,
@@ -11,7 +11,7 @@ export const useAllCategories = () => {
   };
 };
 
-const getAllCategories = async (): Promise<Model.Category[]> => {
+const getAllCategories = async (): Promise<string[]> => {
   const response = await fetch(`/api/categories`);
   return response.json();
 };

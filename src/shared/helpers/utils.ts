@@ -28,10 +28,11 @@ export const getRefreshToken = async (refreshToken: string) => {
 
 
 export const getQueryString = (searchParams: URLSearchParams, limit?: string): string => {
-    const paramsObj: Record<string, string> = {offset: "0", limit: limit || "15", };
+    const paramsObj: Record<string, string> = {skip: "0", limit: limit || "5", };
     for (const [key, value] of Array.from(searchParams.entries())) {
         if( key === "page") {
-            paramsObj.offset = String(Number(value) * 6)
+            const page = Number(value);
+            paramsObj.skip = String(page > 0 ? (page - 1) * Number(paramsObj.limit) : 0);
         } else {
             paramsObj[key] = value;
         }     

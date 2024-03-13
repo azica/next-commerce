@@ -20,12 +20,12 @@
 .swiperThumbs {
     box-sizing: border-box;
     padding: 10px 0;
+    height: 100%;
 }
 
 .swiperThumbs .swiper-slide {
     width: 25%;
-    height: 100%;
-    opacity: 0.4;
+    opacity: 0.2;
 }
 
 .swiperThumbs .swiper-slide-thumb-active {

@@ -10,8 +10,9 @@ const ProductCard = ({
   category,
   description,
   id,
-  images,
+  thumbnail,
   className,
+  discountPercentage,
 }: Model.Product & { className?: string }) => {
   const addToCartHandle = (id: number) => {
 
@@ -21,7 +22,7 @@ const ProductCard = ({
     if (existingProductIndex !== -1) {
       cartList[existingProductIndex].quantity += 1
     } else {
-      cartList.push({ title, price, images, description, category, id, quantity: 1 })
+      cartList.push({ title, price, thumbnail, description, category, id, quantity: 1 })
     }
 
     localStorage.setItem("cartList", JSON.stringify(cartList))
@@ -29,9 +30,9 @@ const ProductCard = ({
 
   return (
     <Card className={`group/item hover:bg-gray-100 transition-all duration-300 w-full cursor-pointer h-full ${className}`}>
-      <div className="relative h-[275px]">
-        {images.length > 0 ? <img src={images[0].replace(/^["\\[]|["\\]$/g, "").replace(/^"/, "")} alt={title} className="w-full h-full object-cover" /> : null}
-        {/* {images.length > 0 ? <Image src={images[0].replace(/^["\\[]|["\\]$/g, "").replace(/^"/, "")} alt={title} layout="fill" objectFit="cover" /> : null} */}
+      <div className="relative h-[275px] p-3">
+        {/* {images.length > 0 ? <img src={images[0].replace(/^["\\[]|["\\]$/g, "").replace(/^"/, "")} alt={title} className="w-full h-full object-cover" /> : null} */}
+        {thumbnail ? <Image src={thumbnail} alt={title} layout="fill" objectFit="cover" /> : null}
         <div className="transition-all duration-300 invisible flex flex-col gap-5 text-black absolute top-4 right-3 group-hover/item:visible">
           <SocialLinks />
         </div>
@@ -45,10 +46,10 @@ const ProductCard = ({
         <Typography as="a" variant="h6" className="mb-2 font-semibold text-black text-base" href={`/shop/${id}`}>
           {title}
         </Typography>
-        <Typography variant="h6" className="mb-2 font-normal text-black">
-          {category.name}
+        <Typography variant="h6" className="mb-2 font-normal text-black capitalize">
+          {category}
         </Typography>
-        <Typography className="text-purple">{price.toFixed(2)} $</Typography>
+        <Typography className="text-purple">{price.toFixed(2)} $  <span>{discountPercentage}</span></Typography>
       </CardBody>
     </Card>
   )

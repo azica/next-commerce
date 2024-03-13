@@ -1,11 +1,14 @@
 "use client"
 
+import Image from "next/image"
 import { useState } from 'react';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-const ThumbsGallery = ({ images }: { images: string[] }) => {
+const ThumbsGallery = ({ images }: { images?: string[] }) => {
     const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
+
+    if (!images || images.length < 0) return null
 
     return (
         <div className="slider-container">
@@ -16,7 +19,7 @@ const ThumbsGallery = ({ images }: { images: string[] }) => {
                 modules={[FreeMode, Navigation, Thumbs]}>
                 {
                     images.map((image, idx) => (<SwiperSlide key={idx} className="relative h-[450px]">
-                        <img src={image.replace(/^["\\[]|["\\]$/g, "").replace(/^"/, "")} alt="Product" layout="fill" className="object-cover" />
+                        <Image src={image} alt="Product" className="object-cover" fill />
                     </SwiperSlide>))
                 }
             </Swiper>
@@ -30,8 +33,8 @@ const ThumbsGallery = ({ images }: { images: string[] }) => {
                 className="swiperThumbs"
             >
                 {
-                    images.map((image, idx) => (<SwiperSlide key={idx}>
-                        <img src={image.replace(/^["\\[]|["\\]$/g, "").replace(/^"/, "")} alt="Product" layout="fill" className="object-cover cursor-pointer" />
+                    images.map((image, idx) => (<SwiperSlide key={idx} className="relative h-[100px]">
+                        <Image src={image} alt="Product" layout="fill" className="object-cover cursor-pointer" />
                     </SwiperSlide>))
                 }
             </Swiper>

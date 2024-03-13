@@ -1,10 +1,10 @@
-import { API_URL } from "@/shared/constants";
+import { API_DAMMY } from "@/shared/constants";
 
 
 export async function GET(req: Request, { params }: { params: { id: string } }) {      
   try {
 
-    const response = await fetch(`${API_URL}/products/${params.id}`);
+    const response = await fetch(`${API_DAMMY}/products/${params.id}`);
 
     console.log(params.id)
     console.log(response)

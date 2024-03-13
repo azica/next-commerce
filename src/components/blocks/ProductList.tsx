@@ -6,13 +6,13 @@ import ProductCard from "./ProductCard";
 const ProductList = () => {
   const { products } = useAllProducts<Model.Product[]>();
 
-  if (!products) {
+  if (!products || products.length < 0) {
     <h2> There is not products</h2>
   }
 
   return (
-    <div className="grid grid-cols-3 gap-3">
-      {products?.map((product) => (
+    <div className="grid grid-cols-3 gap-3 w-full">
+      {products.map((product) => (
         <ProductCard key={product.id} {...product} />
       ))}
     </div>

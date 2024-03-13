@@ -1,65 +1,52 @@
 "use client"
 import type { ChangeEvent } from "react"
 
-import { Typography } from "@material-tailwind/react"
-import { usePathname, useRouter } from "next/navigation"
+import { Slider, Typography } from "@material-tailwind/react"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 
 import { useCreateQueryString } from "@/hooks/useCreateQueryString"
+import { useDebounce } from "@/hooks/useDebounce"
 
-const FilterByPrice = ({ min = 0, max = 1000 }) => {
+const FilterByPrice = () => {
+  const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
 
-  const [minValue, setMinValue] = useState(min)
-  const [maxValue, setMaxValue] = useState(max)
+  const [value, setValue] = useState(searchParams.get("price") || "")
+
   const { createQueryString, separator } = useCreateQueryString()
 
-  useEffect(() => {
-    minValue && router.push(`${pathname}${separator}${createQueryString("price_min", minValue)}`)
-  }, [minValue])
+  const debouncedPushQuery = useDebounce((newValue) => {
+    router.push(`${pathname}${separator}${createQueryString("price", newValue)}`);
+  }, 500);
 
   useEffect(() => {
-    maxValue && router.push(`${pathname}${separator}${createQueryString("price_max", maxValue)}`)
-  }, [maxValue])
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name } = e.target
-    const value = parseInt(e.target.value)
-    if (name === "minValue") {
-      setMinValue(value)
-    } else if (name === "maxValue") {
-      setMaxValue(value)
+    if (Number(value) <= 0) {
+      const updatedParams = new URLSearchParams(searchParams.toString());
+      updatedParams.delete("price");
+      const updatedQueryString = updatedParams.toString();
+      const updatedUrl = updatedQueryString ? `${pathname}${separator}${updatedQueryString}` : pathname;
+      router.push(updatedUrl);
+    } else {
+      debouncedPushQuery(value)
     }
+
+  }, [value, searchParams])
+
+
+  const changeHandle = (e: ChangeEvent<HTMLInputElement>) => {
+    const price = Math.floor(Number(e.target.value))
+    setValue(String(price))
   }
 
   return (
     <div className="my-10">
       <div className="flex gap-2 mb-5 text-black">
         <Typography>Price:</Typography>
-        <Typography>$ {minValue}</Typography>-<Typography>$ {maxValue}</Typography>
+        <Typography>$ {value}</Typography>
       </div>
-      <div className="relative h-10 w-full">
-        <input
-          type="range"
-          min={min}
-          max={max}
-          value={minValue}
-          onChange={handleChange}
-          name="minValue"
-          className="thumb thumb--left"
-        />
-        <input
-          type="range"
-          min={min}
-          max={max}
-          value={maxValue}
-          onChange={handleChange}
-          name="maxValue"
-          className="thumb thumb--right"
-        />
-        <div className="absolute bg-gray-500 w-full z-10 rounded h-1" />
-      </div>
+      <Slider defaultValue={value} onChange={changeHandle} />
     </div>
   )
 }

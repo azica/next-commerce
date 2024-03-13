@@ -6,6 +6,9 @@ import { useEffect, useState } from "react"
 
 import CartDrawer from "@/components/blocks/Cart"
 
+import Modal from "../ui/Modal"
+
+
 const HeaderActions = () => {
   const session = useSession()
   const [showCart, setShowCart] = useState(false)
@@ -70,6 +73,9 @@ const HeaderActions = () => {
           <Button>Sing In</Button>
         </a>
       )}
+      <Modal open={showSearchBar} handleOpen={() => setShowSearchBar(!showSearchBar)}>
+        <Search />
+      </Modal>
     </div>
   )
 }

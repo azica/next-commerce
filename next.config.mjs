@@ -2,11 +2,11 @@
 const nextConfig = {
     reactStrictMode: true,
     images: {
-        domains: ['picsum.photos', 'encrypted-tbn0.gstatic.com', 'www.next.us', 'api.escuelajs.co', "i.imgur.com", "placeimg.com"],
+        domains: ["cdn.dummyjson.com"],
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'i.imgur.com',
+                hostname: 'cdn.dummyjson.com',
                 port: '',
             },
         ],
@@ -18,30 +18,9 @@ const nextConfig = {
     },
     webpack(config) {
         config.module.rules.push({
-            test: /\.svg$/i,
-            issuer: /\.[jt]sx?$/,
-            use: [
-                {
-                    loader: '@svgr/webpack',
-                    options: {
-                        svgoConfig: {
-                            plugins: [
-                                {
-                                    name: 'preset-default',
-                                    params: {
-                                        overrides: {
-                                            cleanupIds: false,
-                                            removeViewBox: false,
-                                        },
-                                    },
-                                },
-                                'removeXMLNS',
-                            ],
-                        },
-                    },
-                },
-            ],
-        })
+            test: /\.svg$/,
+            use: ['@svgr/webpack']
+        });
 
         return config
     },

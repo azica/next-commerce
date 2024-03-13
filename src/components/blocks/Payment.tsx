@@ -1,6 +1,6 @@
 "use client"
 import { Input, Radio, Typography, Button } from "@material-tailwind/react";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { paymentData, paymentMethods } from "@/shared/mockdata/mockdata"
@@ -22,13 +22,17 @@ const Payment = () => {
 
 
     console.log(paymentMethod)
+    const submitHandle = (e: FormEvent) => {
+        e.preventDefault()
+        // handleSubmit()
+    }
     return <>
         <Typography
             variant="h6"
         >
             Select a delivery address
         </Typography>
-        <form className={handleSubmit}>
+        <form onSubmit={submitHandle}>
             <div className="flex flex-col">
                 {paymentMethods.map((input, idx) => (
                     <Radio

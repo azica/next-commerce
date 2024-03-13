@@ -1,15 +1,16 @@
 "use client"
 import { IconButton } from "@material-tailwind/react"
 import { ArrowLeft, ArrowRight } from "akar-icons"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useState } from "react"
 
 import { useCreateQueryString } from "@/hooks/useCreateQueryString"
 
 const Pagination = ({ totalCount = 5 }: { totalCount?: number }) => {
+  const searchParams = useSearchParams()
   const pathname = usePathname()
   const router = useRouter()
-  const [active, setActive] = useState(1)
+  const [active, setActive] = useState(Number(searchParams.get("page")) || 1)
   const { createQueryString, separator } = useCreateQueryString()
 
   const clickHandle = (page: number) => {
