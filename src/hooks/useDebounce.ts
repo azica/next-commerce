@@ -12,7 +12,7 @@ export const useDebounce = (callback: CallbackFunction, delay: number): Callback
         clearTimeout(timer);
       }
     };
-  }, []);
+  }, [timer]);
 
   const debounceFunction: CallbackFunction = (...args) => {
     if (timer) {

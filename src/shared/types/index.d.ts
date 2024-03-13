@@ -7,7 +7,7 @@ export declare global {
     open: boolean;
     handleOpen: () => void;
     size?: size;
-    header?: string;
+    header?: ReactNode;
     children: ReactNode;
     footer?: string
   }>;
@@ -68,6 +68,7 @@ export declare global {
     type Tokens = {
       access_token: string;
       refresh_token: string;
+      exp: string;
     };
   }
 }

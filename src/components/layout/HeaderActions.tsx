@@ -1,11 +1,12 @@
 "use client"
 import { Button, IconButton } from "@material-tailwind/react"
-import { Cart, Heart, Search } from "akar-icons"
+import { Cart, Heart, Search as SearchIcon } from "akar-icons"
 import { signOut, useSession } from "next-auth/react"
 import { useEffect, useState } from "react"
 
 import CartDrawer from "@/components/blocks/Cart"
 
+import Search from "../blocks/Search"
 import Modal from "../ui/Modal"
 
 
@@ -38,7 +39,7 @@ const HeaderActions = () => {
 
   const actions = [
     {
-      icon: <Search className="text-primary-500" />,
+      icon: <SearchIcon className="text-primary-500" />,
       handle: () => searchHandle(),
     },
     {
@@ -74,7 +75,7 @@ const HeaderActions = () => {
         </a>
       )}
       <Modal open={showSearchBar} handleOpen={() => setShowSearchBar(!showSearchBar)}>
-        <Search />
+        <Search handleOpen={() => setShowSearchBar(!showSearchBar)} />
       </Modal>
     </div>
   )

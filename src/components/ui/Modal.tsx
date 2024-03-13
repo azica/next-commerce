@@ -2,7 +2,7 @@
 
 import { Dialog, DialogHeader, DialogBody, DialogFooter, Button } from "@material-tailwind/react";
 
-const Modal: Modal = ({ open, handleOpen, size, header, footer, children }) => {
+const Modal: Modal = ({ open, handleOpen, size, header, children }) => {
 
     return (
         <Dialog
@@ -10,7 +10,7 @@ const Modal: Modal = ({ open, handleOpen, size, header, footer, children }) => {
             size={size || "md"}
             handler={handleOpen}
         >
-            <DialogHeader>{header}</DialogHeader>
+            {header ? <DialogHeader>{header}</DialogHeader> : null}
             <DialogBody>
                 {children}
             </DialogBody>

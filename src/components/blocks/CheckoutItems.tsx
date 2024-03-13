@@ -1,6 +1,8 @@
 "use client"
 import { IconButton, Typography } from "@material-tailwind/react"
 import { Minus, Plus, TrashCan } from "akar-icons"
+import Image from "next/image"
+
 const tableHead = ["Products", "", "Price", "Quantity", "Subtotal", ""]
 
 const CheckoutItems = (
@@ -37,7 +39,7 @@ const CheckoutItems = (
                 return <tr key={el.title}>
                     <td className={classes}>
                         <div className="w-20 h-20 shrink-0">
-                            <img src={el.images[0] || el.images[1]} alt={el.title} className="w-full" />
+                        {el.thumbnail ? <Image src={el.thumbnail} alt={el.title} layout="fill" objectFit="cover" /> : null}
                         </div>
                     </td>
                     <td className={classes}>

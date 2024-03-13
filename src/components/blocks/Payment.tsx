@@ -1,6 +1,6 @@
 "use client"
 import { Input, Radio, Typography, Button } from "@material-tailwind/react";
-import { FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { paymentData, paymentMethods } from "@/shared/mockdata/mockdata"
@@ -41,7 +41,7 @@ const Payment = () => {
                         checked={input.checked}
                         key={idx}
                         className="border-bottom border-gray-900"
-                        onChange={() => setPaymentMethod(e.value)} />
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => setPaymentMethod(e.target.value)} />
                 ))}
             </div>
             <div className="flex gap-2 flex-col mb-5">

@@ -1,6 +1,7 @@
 "use client"
 import { Drawer, Typography, List, ListItem, IconButton, Button, ListItemSuffix } from "@material-tailwind/react"
 import { TrashCan } from "akar-icons"
+import Image from "next/image"
 import { Fragment, useEffect, useState } from "react"
 
 const Cart = ({ open, toggleDrawer }: { open: boolean; toggleDrawer: () => void }) => {
@@ -35,7 +36,7 @@ const Cart = ({ open, toggleDrawer }: { open: boolean; toggleDrawer: () => void 
           <Fragment key={el.id}>
             <ListItem className="flex gap-3">
               <div className="w-20 h-20 shrink-0">
-                <img src={el.images[0] || el.images[1]} alt={el.title} className="w-full" />
+                {el.thumbnail ? <Image src={el.thumbnail} alt={el.title} layout="fill" objectFit="cover" /> : null}
               </div>
               <div>
                 <Typography variant="h6" className="text-primary-500 font-semibold text-xs">

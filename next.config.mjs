@@ -13,7 +13,7 @@ const nextConfig = {
     },
     experimental: {
         appDir: true,
-        typedRoutes: true,
+        typedRoutes: false,
         scrollRestoration: true,
     },
     webpack(config) {

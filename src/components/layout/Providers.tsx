@@ -1,22 +1,20 @@
 "use client"
 
-import type { ReactNode } from "react"
-
 import { ThemeProvider } from "@material-tailwind/react"
 import { Session } from "next-auth"
 import { SessionProvider } from "next-auth/react"
 
 import { customTheme } from "@/styles/global"
 
-type Props = {
-  children: ReactNode;
+interface ProvidersProps {
+  children: any;
   session: Session | null;
-};
+}
 
-const Providers: React.FC<Props> = ({ children, session }) => {
+const Providers = ({ children, session }: ProvidersProps) => {
   return (
     <SessionProvider session={session}>
-      <ThemeProvider theme={customTheme}>
+      <ThemeProvider value={customTheme}>
         {children}
       </ThemeProvider>
     </SessionProvider>

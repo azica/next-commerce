@@ -9,11 +9,11 @@ const Rating = ({ stars }: { stars: number }) => {
 
     const [rating, setRating] = useState(stars);
 
-    const handleHover = (value) => {
+    const handleHover = (value: number) => {
         setRating(value);
     };
 
-    const handleClick = (value) => {
+    const handleClick = (value: number) => {
         setRating(value);
         // if (onChange) {
         //     onChange(value);

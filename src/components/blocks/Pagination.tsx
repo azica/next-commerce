@@ -15,7 +15,7 @@ const Pagination = ({ totalCount = 5 }: { totalCount?: number }) => {
 
   const clickHandle = (page: number) => {
     setActive(page)
-    router.push(`${pathname}${separator}${createQueryString("page", page)}`)
+    router.push(`${pathname}${separator}${createQueryString("page", String(page))}`)
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 

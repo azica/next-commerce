@@ -23,7 +23,7 @@ export const authConfig: AuthOptions = {
           headers: { "Content-Type": "application/json" }
         })
         const user = await res.json()
-  
+
         console.log(user)
         if (res.ok && user) {
           return user
@@ -35,7 +35,7 @@ export const authConfig: AuthOptions = {
       id: "signup",
       name: "Signup",
       type: "credentials",
-      credentials: { 
+      credentials: {
         name: { label: "name", type: "text", placeholder: "Your Name" },
         email: { label: "email", type: "email", placeholder: "email@email.com" },
         password: { label: "Password", type: "password" }
@@ -43,7 +43,7 @@ export const authConfig: AuthOptions = {
       async authorize(credentials) {
         const res = await fetch("https://api.escuelajs.co/api/v1/users/", {
           method: 'POST',
-          body: JSON.stringify({...credentials, avatar: "https://picsum.photos/800"}),
+          body: JSON.stringify({ ...credentials, avatar: "https://picsum.photos/800" }),
           headers: { "Content-Type": "application/json" }
         })
         const user = await res.json()
@@ -60,7 +60,7 @@ export const authConfig: AuthOptions = {
   callbacks: {
     async jwt({ token, user, account }) {
       // If the token is expired, refresh it
-      if (user && token && Math.floor(Date.now() / 1000) > (token.exp - 60)) {
+      if (user && token && Math.floor(Date.now() / 1000) > (account?.expires_at || token.exp - 60)) {
         try {
           const res = await fetch("URL_TO_REFRESH_TOKEN_ENDPOINT", {
             method: 'POST',
@@ -85,8 +85,8 @@ export const authConfig: AuthOptions = {
       }
       return token
     },
-    async session({ session, token, user }) {
-      session.user = token as Response.Tokens & Model.User
+    async session({ session, token }) {
+      session.user = token as any
 
       return session;
     },
