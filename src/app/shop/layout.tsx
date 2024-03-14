@@ -7,7 +7,7 @@ const ShopLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <Container className="flex gap-10">
+    <Container className="flex gap-10 flex-col mb-20">
       {children}
     </Container>
   )

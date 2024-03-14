@@ -19,7 +19,7 @@ const BestSeller = () => {
             <Typography variant="h2" className="mb-4 font-medium text-center">
                 Our BestSeller
             </Typography>
-            <div className="h-[1000px]">
+            <div className="h-[1000px] py-5">
                 {
                     !products || !products.length ?
                         <h2> There are no products</h2>

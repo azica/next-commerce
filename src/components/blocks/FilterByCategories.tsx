@@ -21,6 +21,10 @@ const FilterByCategories = () => {
     return <div>Loading...</div>;
   }
 
+  if (!categories || !categories.length) {
+    return <p>There is no categories</p>
+  }
+
   if (isError) {
     return <div>Error: {isError.message}</div>;
   }

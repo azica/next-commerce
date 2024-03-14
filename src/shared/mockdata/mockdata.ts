@@ -1,3 +1,5 @@
+import { ShippingBoxV2, Money, Headphone, CreditCard } from "akar-icons";
+
 export const authData: Record<string, any> = {
   login: {
     title: "Welcome 👋 ",
@@ -135,12 +137,13 @@ export const authData: Record<string, any> = {
 }
 
 export const paymentMethods = [
-  {label: "Debit/Credit Card", value: "debitCredit", checked: true},
-  {label: "Google Pay", value: "google", checked: false},
-  {label: "Paypal", value: "paypal", checked: false},
-  {label: "Cash on Delivery", value: "cash", checked: false},
+  { label: "Debit/Credit Card", value: "debitCredit", checked: true },
+  { label: "Google Pay", value: "google", checked: false },
+  { label: "Paypal", value: "paypal", checked: false },
+  { label: "Cash on Delivery", value: "cash", checked: false },
 ]
-export const paymentData:Record<string, InputData[]> = {
+
+export const paymentData: Record<string, InputData[]> = {
   debitCredit: [
     {
       id: 1,
@@ -257,3 +260,26 @@ export const paymentData:Record<string, InputData[]> = {
     },
   ]
 }
+
+export const footerFeaturesData = [
+  {
+    icon: ShippingBoxV2,
+    title: "Free Shipping",
+    description: "Free shipping for order above $150"
+  },
+  {
+    icon: Money,
+    title: "Money Guarantee",
+    description: "Within 30 days for an exchange"
+  },
+  {
+    icon: Headphone,
+    title: "Online Support",
+    description: "24 hours a day, 7 days"
+  },
+  {
+    icon: CreditCard,
+    title: "Flexible Payment",
+    description: "Pay with multiple credit card"
+  },
+]

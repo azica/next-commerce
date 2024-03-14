@@ -31,7 +31,7 @@ const Header = () => {
         </Link>
         <nav className="flex justify-center capitalize my-3 flex-grow-1">
           {menu.map((link, index) => (
-            <Link href={link.href} key={index} className="headerLink">
+            <Link href={link.href} key={index} className="headerLink cursor-pointer">
               {link.label}
             </Link>
           ))}

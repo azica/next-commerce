@@ -3,21 +3,18 @@ import { Suspense } from "react"
 import BestSeller from "@/components/blocks/BestSeller"
 import Hero from "@/components/blocks/Hero"
 import ShopByCategories from "@/components/blocks/ShopByCategories"
-import Spinner from "@/components/blocks/Spinner"
 
+import Loading from "./loading"
 
 const Home = () => {
   return (
-    <main className="">
+    <>
       <Hero />
-      <Suspense fallback={<Spinner />}>
+      <Suspense fallback={<Loading />}>
         <ShopByCategories />
-      </Suspense>
-      <Suspense fallback={<Spinner />}>
         <BestSeller />
       </Suspense>
-
-    </main>
+    </>
   )
 }
 export default Home

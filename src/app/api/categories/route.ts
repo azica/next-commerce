@@ -1,8 +1,8 @@
-import { API_URL } from "@/shared/constants";
+import { API_DUMMY } from "@/shared/constants";
 
-export async function GET(req: Request, res: Response) {      
+export async function GET(req: Request, res: Response) {
   try {
-    const response = await fetch(`${process.env.NEXT_DAMMY_API}/products/categories`) 
+    const response = await fetch(`${API_DUMMY}/products/categories`)
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }

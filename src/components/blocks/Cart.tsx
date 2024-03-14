@@ -35,8 +35,8 @@ const Cart = ({ open, toggleDrawer }: { open: boolean; toggleDrawer: () => void 
         {cartList.map((el) => (
           <Fragment key={el.id}>
             <ListItem className="flex gap-3">
-              <div className="w-20 h-20 shrink-0">
-                {el.thumbnail ? <Image src={el.thumbnail} alt={el.title} layout="fill" objectFit="cover" /> : null}
+              <div className="w-20 h-20 shrink-0 overflow-hidden">
+                {el.thumbnail ? <Image src={el.thumbnail} alt={el.title} width="80" height="80" /> : null}
               </div>
               <div>
                 <Typography variant="h6" className="text-primary-500 font-semibold text-xs">

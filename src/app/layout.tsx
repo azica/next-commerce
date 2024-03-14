@@ -7,7 +7,9 @@ import "../assets/styles/globals.css"
 import { Metadata } from "next/types";
 import { Session } from "next-auth"
 
+import FooterFeatures from "@/components/blocks/FooterFeatures";
 import Transition from "@/components/blocks/Transition"
+import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header"
 import Providers from "@/components/layout/Providers"
 
@@ -37,6 +39,8 @@ export default function RootLayout({
           <main className="min-h-screen">
             <Transition>{children}</Transition>
           </main>
+          <FooterFeatures />
+          <Footer />
         </Providers>
       </body>
     </html>

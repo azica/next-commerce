@@ -14,7 +14,8 @@ const ThumbsGallery = ({ images }: { images?: string[] }) => {
         <div className="slider-container">
             <Swiper
                 className="mySwiper2"
-                spaceBetween={10}
+                spaceBetween={15}
+                navigation={true}
                 thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : undefined}
                 modules={[FreeMode, Navigation, Thumbs]}>
                 {
@@ -25,7 +26,7 @@ const ThumbsGallery = ({ images }: { images?: string[] }) => {
             </Swiper>
             <Swiper
                 onSwiper={(swiper) => setThumbsSwiper(swiper)}
-                spaceBetween={10}
+                spaceBetween={15}
                 slidesPerView={4}
                 freeMode={true}
                 watchSlidesProgress={true}

@@ -11,7 +11,7 @@ import Loading from "./loading"
 
 const Shop = async () => {
   return (
-    <div className="flex gap-10 min-h-screen w-full">
+    <div className="flex gap-10 min-h-screen w-full mb-10">
       <SideMenu>
         <Filters />
       </SideMenu>
