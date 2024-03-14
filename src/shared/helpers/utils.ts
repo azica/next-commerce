@@ -28,22 +28,22 @@ export const getRefreshToken = async (refreshToken: string) => {
 
 
 export const getQueryString = (searchParams: URLSearchParams, limit?: string): string => {
-    const paramsObj: Record<string, string> = {skip: "0", limit: limit || "5", };
+    const paramsObj: Record<string, string> = { skip: "0", limit: limit || "5", };
     for (const [key, value] of Array.from(searchParams.entries())) {
-        if( key === "page") {
+        if (key === "page") {
             const page = Number(value);
             paramsObj.skip = String(page > 0 ? (page - 1) * Number(paramsObj.limit) : 0);
         } else {
             paramsObj[key] = value;
-        }     
+        }
     }
     return new URLSearchParams(paramsObj).toString();
-  };
-  
- export const fetcher = async <T>(url: string): Promise<T> => {
+};
+
+export const fetcher = async <T>(url: string): Promise<T> => {
     const response = await fetch(url);
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+        throw new Error(`HTTP error! Status: ${response.status}`);
     }
     return response.json();
 };

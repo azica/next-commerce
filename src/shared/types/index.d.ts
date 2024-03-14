@@ -70,5 +70,12 @@ export declare global {
       refresh_token: string;
       exp: string;
     };
+
+    type GetProducts = {
+      products: Model.Product[];
+      total: number;
+      skip: number;
+      limit: number;
+    }
   }
 }

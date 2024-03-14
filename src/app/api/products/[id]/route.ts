@@ -1,13 +1,9 @@
-import { API_DAMMY } from "@/shared/constants";
+import { API_DUMMY } from "@/shared/constants";
 
-
-export async function GET(req: Request, { params }: { params: { id: string } }) {      
+export async function GET(req: Request, { params }: { params: { id: string } }) {
   try {
+    const response = await fetch(`${API_DUMMY}/products/${params.id}`);
 
-    const response = await fetch(`${API_DAMMY}/products/${params.id}`);
-
-    console.log(params.id)
-    console.log(response)
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }

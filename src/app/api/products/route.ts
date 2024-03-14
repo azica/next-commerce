@@ -1,39 +1,40 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-import { API_DAMMY } from "@/shared/constants";
+import { API_DUMMY } from "@/shared/constants";
 
-
-export async function GET(req: NextRequest, res: Response) {      
+export async function GET(req: NextRequest, res: NextResponse) {
   try {
-    const searchParams = req.nextUrl.searchParams;
-    const category = searchParams.get("category")
+    const queryParams = new URL(req.url, 'http://localhost').searchParams;
+    const category = queryParams.get("category");
 
-    let apiUrl = `${API_DAMMY}/products`;
+    let apiUrl = `${API_DUMMY}/products`;
 
     if (category) {
-      apiUrl = `${API_DAMMY}/products/category/${category}`;
+      apiUrl = `${API_DUMMY}/products/category/${category}`;
     }
 
-    const paramsArray = Array.from(searchParams.entries())
-    .filter(([key]) => key !== "category")
-    .map(([key, value]) => `${key}=${value}`) 
-    .join("&");
+    const paramsArray = Array.from(queryParams.entries())
+      .filter(([key]) => key !== "category")
+      .map(([key, value]) => `${key}=${value}`)
+      .join("&");
 
     if (paramsArray) {
       apiUrl += `?${paramsArray}`;
     }
-console.log(apiUrl)
+
     const response = await fetch(apiUrl);
 
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    const data = await response.json();
-    const products = data.products;
-    return Response.json(products);
+    const products = await response.json();
+    console.log(paramsArray)
+    return NextResponse.json<Response.GetProducts>(products);
 
   } catch (error) {
-    return Response.json(error);
+    return NextResponse.json({ error: error }, { status: 500 });
   }
 }
+
+

@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 
-import { API_DAMMY } from "@/shared/constants";
+import { API_DUMMY } from "@/shared/constants";
 
 
 export async function GET(req: NextRequest) {
@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
 
         const query = searchParams.get("query")
 
-        const response = await fetch(`${API_DAMMY}/products/search/?q=${query}`);
+        const response = await fetch(`${API_DUMMY}/products/search/?q=${query}`);
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);

@@ -12,11 +12,7 @@ import ProductCard from "./ProductCard"
 import Container from "../layout/Container"
 
 const BestSeller = () => {
-    const { products, isLoading, error } = useAllProducts<Model.Product[]>({ limit: "30" })
-
-    if (!products || !products.length) {
-        return <h2> There are no products</h2>;
-    }
+    const { products } = useAllProducts<Model.Product[]>({ limit: "30" });
 
     return (
         <Container className="py-16">
@@ -24,20 +20,25 @@ const BestSeller = () => {
                 Our BestSeller
             </Typography>
             <div className="h-[1000px]">
-                <Swiper
-                    className="twoRowsSlider"
-                    spaceBetween={20}
-                    slidesPerView={4}
-                    grid={{
-                        rows: 2,
-                    }}
-                    modules={[Grid]}>
-                    {products?.map((item, idx) => (
-                        <SwiperSlide key={idx}>
-                            <ProductCard {...item} />
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
+                {
+                    !products || !products.length ?
+                        <h2> There are no products</h2>
+                        :
+                        <Swiper
+                            className="twoRowsSlider"
+                            spaceBetween={20}
+                            slidesPerView={4}
+                            grid={{
+                                rows: 2,
+                            }}
+                            modules={[Grid]}>
+                            {products?.map((item, idx) => (
+                                <SwiperSlide key={idx}>
+                                    <ProductCard {...item} />
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                }
             </div>
         </Container>
     )
