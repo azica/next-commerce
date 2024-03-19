@@ -1,11 +1,18 @@
+"use client"
+import { usePathname } from "next/navigation";
 
-import { footerFeaturesData } from "@/shared/mockdata/mockdata";
+import { footerFeaturesData } from "@/shared/mockdata/footerData";
 
 import Container from "../layout/Container";
 import IconWrapper from "../ui/IconWrapper";
 
 const FooterFeatures = () => {
 
+    const pathname = usePathname()
+    const showHeader = pathname === "/signin"
+    if (showHeader) {
+        return null
+    }
     return (
         <Container className="grid grid-cols-4 gap-10 py-10">
             {footerFeaturesData.map((item, idx) => (

@@ -19,21 +19,21 @@ const BestSeller = () => {
             <Typography variant="h2" className="mb-4 font-medium text-center">
                 Our BestSeller
             </Typography>
-            <div className="h-[1000px] py-5">
+            <div className="h-[870px] py-5">
                 {
                     !products || !products.length ?
                         <h2> There are no products</h2>
                         :
                         <Swiper
                             className="twoRowsSlider"
-                            spaceBetween={20}
+                            spaceBetween={16}
                             slidesPerView={4}
                             grid={{
                                 rows: 2,
                             }}
                             modules={[Grid]}>
                             {products?.map((item, idx) => (
-                                <SwiperSlide key={idx}>
+                                <SwiperSlide key={idx} className="pb-2">
                                     <ProductCard {...item} />
                                 </SwiperSlide>
                             ))}

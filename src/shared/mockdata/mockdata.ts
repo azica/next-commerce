@@ -1,4 +1,4 @@
-import { ShippingBoxV2, Money, Headphone, CreditCard } from "akar-icons";
+import { HomeAlt1, CreditCardAlt1, Receipt } from "akar-icons"
 
 export const authData: Record<string, any> = {
   login: {
@@ -137,149 +137,139 @@ export const authData: Record<string, any> = {
 }
 
 export const paymentMethods = [
-  { label: "Debit/Credit Card", value: "debitCredit", checked: true },
-  { label: "Google Pay", value: "google", checked: false },
-  { label: "Paypal", value: "paypal", checked: false },
-  { label: "Cash on Delivery", value: "cash", checked: false },
+  { label: "Debit/Credit Card", value: "debitCredit" },
+  { label: "Google Pay", value: "google" },
+  { label: "Paypal", value: "paypal" },
+  { label: "Cash on Delivery", value: "cash" },
 ]
 
-export const paymentData: Record<string, InputData[]> = {
-  debitCredit: [
-    {
-      id: 1,
-      value: "",
-      field: "cardNumber",
-      placeholder: "4444 44444 4444 4444",
-      type: "text",
-      required: true,
-      label: "Card Number",
-      autoComplete: "off",
-      validations: {
-        required: "Card Number is required.",
-        pattern: {
-          value: /^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/,
-          message: "Invalid card number.",
-        },
+export const creditCardValues: InputData[] = [
+  {
+    id: 1,
+    value: "",
+    field: "cardNumber",
+    placeholder: "4444 4444 4444 4444",
+    type: "text",
+    required: true,
+    label: "Card Number",
+    autoComplete: "off",
+    mask: "9999 9999 9999 9999",
+    validations: {
+      required: "Card Number is required.",
+      pattern: {
+        value: /^(?:\d{4} ?){4}$/,
+        message: "Invalid card number.",
       },
     },
-    {
-      id: 2,
-      value: "",
-      field: "cardName",
-      placeholder: "Card Name",
-      type: "text",
-      label: "Card Name",
-      autoComplete: "off",
-      validations: {
-        required: "Card Number is required.",
+    className: "col-span-2"
+  },
+  {
+    id: 2,
+    value: "",
+    field: "cardName",
+    placeholder: "Card Name",
+    type: "text",
+    label: "Card Name",
+    autoComplete: "off",
+    validations: {
+      required: "Card Name is required.",
+    },
+    className: "col-span-2"
+  },
+  {
+    id: 3,
+    value: "",
+    field: "expiredDate",
+    placeholder: "MM/YY",
+    mask: "99/99",
+    type: "text",
+    required: true,
+    label: "Expiry Date",
+    autoComplete: "off",
+    validations: {
+      required: "Expiry Date is required.",
+      pattern: {
+        value: /^(0[1-9]|1[0-2])\/([0-9]{2})$/,
+        message: "Invalid expiry date. Please enter in MM/YY format.",
       },
     },
-    {
-      id: 3,
-      value: "",
-      field: "expiredDate",
-      placeholder: "09/26",
-      type: "text",
-      required: true,
-      label: "Expiry Date",
-      autoComplete: "off",
-      validations: {
-        required: "Expiry Date is required.",
+  },
+  {
+    id: 4,
+    value: "",
+    field: "cvv",
+    placeholder: "CVV",
+    type: "text",
+    required: true,
+    label: "CVV",
+    autoComplete: "off",
+    mask: "999",
+    validations: {
+      required: "CVV is required.",
+      minLength: {
+        value: 3,
+        message: "CVV must be at least 3 characters.",
+      },
+      maxLength: {
+        value: 4,
+        message: "CVV cannot exceed 4 characters.",
+      },
+      pattern: {
+        value: /^[0-9]{3,4}$/,
+        message: "Invalid CVV. CVV must be a 3 or 4-digit number.",
       },
     },
-    {
-      id: 4,
-      value: "",
-      field: "cvv",
-      placeholder: "Cvv",
-      type: "text",
-      required: true,
-      label: "CVV",
-      autoComplete: "off",
-      validations: {
-        required: "CVV is required.",
-      },
-    },
-  ],
-  google: [
-    {
-      id: 1,
-      value: "",
-      field: "cardNumber",
-      placeholder: "4444 44444 4444 4444",
-      type: "text",
-      required: true,
-      label: "Card Number",
-      autoComplete: "off",
-      validations: {
-        required: "Card Number is required.",
-        pattern: {
-          value: /^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/,
-          message: "Invalid card number.",
-        },
-      },
-    },
-    {
-      id: 2,
-      value: "",
-      field: "cardName",
-      placeholder: "Card Name",
-      type: "text",
-      required: true,
-      label: "Card Name",
-      autoComplete: "off",
-      validations: {
-        required: "Card Number is required.",
-      },
-    },
-    {
-      id: 3,
-      value: "",
-      field: "expiredDate",
-      placeholder: "09/26",
-      type: "text",
-      required: true,
-      label: "Expiry Date",
-      autoComplete: "off",
-      validations: {
-        required: "Expiry Date is required.",
-      },
-    },
-    {
-      id: 4,
-      value: "",
-      field: "cvv",
-      placeholder: "Cvv",
-      type: "text",
-      required: true,
-      label: "CVV",
-      autoComplete: "off",
-      validations: {
-        required: "CVV is required.",
-      },
-    },
-  ]
-}
+  }
+]
 
-export const footerFeaturesData = [
+
+export const addressValues = [
   {
-    icon: ShippingBoxV2,
-    title: "Free Shipping",
-    description: "Free shipping for order above $150"
+    id: 1,
+    value: "",
+    field: "name",
+    placeholder: "Enter Name",
+    type: "text",
+    required: true,
+    label: "Name",
+    autoComplete: "off",
+    validations: {
+      required: "Name is required.",
+    },
+    className: "col-span-2"
   },
   {
-    icon: Money,
-    title: "Money Guarantee",
-    description: "Within 30 days for an exchange"
+    id: 2,
+    value: "",
+    field: "mobileNumber",
+    placeholder: "Enter Mobile Number",
+    type: "tel",
+    required: true,
+    label: "Mobile Number",
+    autoComplete: "off",
+    validations: {
+      required: "Mobile number is required.",
+    },
+    className: "col-span-1"
   },
   {
-    icon: Headphone,
-    title: "Online Support",
-    description: "24 hours a day, 7 days"
+    id: 3,
+    value: "",
+    field: "address",
+    placeholder: "Address",
+    type: "tel",
+    required: true,
+    label: "Enter Address",
+    autoComplete: "off",
+    validations: {
+      required: "Address is required.",
+    },
+    className: "col-span-1"
   },
-  {
-    icon: CreditCard,
-    title: "Flexible Payment",
-    description: "Pay with multiple credit card"
-  },
+]
+
+export const steps = [
+  { title: "Shipping Address", icon: HomeAlt1, link: "shipping" },
+  { title: "Payment Method", icon: CreditCardAlt1, link: "payment" },
+  { title: "Review Your Order", icon: Receipt, link: "review" },
 ]

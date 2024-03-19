@@ -1,5 +1,5 @@
-import Spinner from "@/components/blocks/Spinner";
 import Container from "@/components/layout/Container"
+import Spinner from "@/components/ui/Spinner";
 
 const Loading = () => {
     return (

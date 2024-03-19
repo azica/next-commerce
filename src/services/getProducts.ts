@@ -1,7 +1,7 @@
 
 
 import { useSearchParams } from "next/navigation";
-import useSWR, { SWRResponse } from "swr";
+import useSWR from "swr";
 
 import { fetcher, getQueryString } from '@/shared/helpers/utils';
 

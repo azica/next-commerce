@@ -8,8 +8,8 @@ export declare global {
     handleOpen: () => void;
     size?: size;
     header?: ReactNode;
+    footer?: ReactNode;
     children: ReactNode;
-    footer?: string
   }>;
 
   type ResponseSuccess = {

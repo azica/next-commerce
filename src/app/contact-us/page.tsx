@@ -1,5 +1,11 @@
+import Container from "@/components/layout/Container"
+
 const Contact = () => {
-  return <div>Contact</div>
+  return (
+    <Container>
+      <div>Contact</div>
+    </Container>
+  )
 }
 
 export default Contact

@@ -1,8 +1,8 @@
 "use client"
 
-import { Dialog, DialogHeader, DialogBody, DialogFooter, Button } from "@material-tailwind/react";
+import { Dialog, DialogHeader, DialogBody, DialogFooter } from "@material-tailwind/react";
 
-const Modal: Modal = ({ open, handleOpen, size, header, children }) => {
+const Modal: Modal = ({ open, handleOpen, size, header, children, footer }) => {
 
     return (
         <Dialog
@@ -14,23 +14,9 @@ const Modal: Modal = ({ open, handleOpen, size, header, children }) => {
             <DialogBody>
                 {children}
             </DialogBody>
-            <DialogFooter>
-                <Button
-                    variant="text"
-                    color="red"
-                    onClick={() => handleOpen()}
-                    className="mr-1"
-                >
-                    <span>Cancel</span>
-                </Button>
-                <Button
-                    variant="gradient"
-                    color="green"
-                    onClick={() => handleOpen()}
-                >
-                    <span>Confirm</span>
-                </Button>
-            </DialogFooter>
+            {footer ? <DialogFooter>
+              {footer}
+            </DialogFooter>: null}
         </Dialog>
     )
 

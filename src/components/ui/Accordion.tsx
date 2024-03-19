@@ -8,7 +8,7 @@ import {
   Accordion as MaterialAccordion,
 } from "@material-tailwind/react"
 import { ChevronDownSmall } from "akar-icons"
-import { useState, type ReactNode } from "react"
+import { useState, useEffect, type ReactNode, useRef } from "react"
 
 const Accordion = ({
   title,
@@ -18,6 +18,18 @@ const Accordion = ({
   children: ReactNode;
 }) => {
   const [open, setOpen] = useState(false);
+  const accordionBodyRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (open && accordionBodyRef.current) {
+      const bodyHeight = accordionBodyRef.current.scrollHeight;
+      if (bodyHeight > 365) {
+        accordionBodyRef.current.classList.add('h-[365px]', 'thumb');
+      } else {
+        accordionBodyRef.current.classList.remove('h-[365px]', 'thumb');
+      }
+    }
+  }, [open]);
 
   const handleOpen = () => {
     setOpen(!open)
@@ -38,7 +50,7 @@ const Accordion = ({
           <Typography className="mr-auto font-semibold">{title}</Typography>
         </AccordionHeader>
       </ListItem>
-      <AccordionBody className="py-1">
+      <AccordionBody className="py-1" ref={accordionBodyRef}>
         {children}
       </AccordionBody>
     </MaterialAccordion>

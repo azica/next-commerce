@@ -1,7 +1,7 @@
 import { Suspense } from "react"
 
 import AuthContent from "@/components/blocks/AuthContent"
-import Spinner from "@/components/blocks/Spinner"
+import Spinner from "@/components/ui/Spinner"
 
 const Auth = () => {
   return (

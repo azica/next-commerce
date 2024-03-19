@@ -36,7 +36,6 @@
 .thumb {
   overflow-y: scroll;
   overflow-x: none;
-  height: 100vh;
 }
  
 .thumb::-webkit-scrollbar {

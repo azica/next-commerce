@@ -43,7 +43,7 @@ const AuthForm: FC<AuthForm> = ({ hasAccount, setHasAccount, inputs, buttonText,
     )
   }
 
-  const onSubmit = async (data: FormValues) => {
+  const submitHandle = async (data: FormValues) => {
     setIsLoading(true)
     try {
       const response = hasAccount ?
@@ -69,7 +69,7 @@ const AuthForm: FC<AuthForm> = ({ hasAccount, setHasAccount, inputs, buttonText,
   }
 
   return (
-    <form className="mt-8 mb-2" onSubmit={handleSubmit(onSubmit)}>
+    <form className="mt-8 mb-2" onSubmit={handleSubmit(submitHandle)}>
       <div className="mb-1 flex flex-col gap-6">
         {inputs?.map((input) => (
           <div key={input.id} className="relative">

@@ -27,6 +27,7 @@ const FilterByPrice = () => {
       updatedParams.delete("price");
       const updatedQueryString = updatedParams.toString();
       const updatedUrl = updatedQueryString ? `${pathname}${separator}${updatedQueryString}` : pathname;
+
       router.push(updatedUrl);
     } else {
       debouncedPushQuery(value)
@@ -39,7 +40,7 @@ const FilterByPrice = () => {
     const price = Math.floor(Number(e.target.value))
     setValue(String(price))
   }
-
+  
   return (
     <div className="my-10">
       <div className="flex gap-2 mb-5 text-black">

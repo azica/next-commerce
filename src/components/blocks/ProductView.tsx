@@ -17,9 +17,13 @@ const ProductView = ({ product }: { product: Model.Product }) => {
                 <h4 className="font-normal"> {product.category}</h4>
                 <Rating stars={Number(product.rating)} />
                 <div className="flex gap-3 items-center my-4">
-                    <h4 className="font-normal">${product.price}</h4>
                     {
-                        product.discountPercentage && <h5 className="flex gap-1 text-purple-600 align-center font-semibold">-{product.discountPercentage} <Percentage strokeWidth={1.5} size={20} /></h5>
+                        product.discountPercentage ?
+                            <>
+                                <h5 className="flex gap-1 text-purple-600 align-center font-semibold">${product.price - (product.price * product.discountPercentage / 100)}</h5>
+                                <h4 className="font-normal line-through">${product.price}</h4>
+                            </>
+                            : <h4 className="font-normal">${product.price}</h4>
                     }
                 </div>
 

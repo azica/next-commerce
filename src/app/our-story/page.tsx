@@ -1,3 +1,5 @@
+import Container from "@/components/layout/Container";
+
 export default function OurStory() {
-  return <h1>our story</h1>
+  return <Container> <h1>our story</h1></Container>
 }

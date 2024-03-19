@@ -43,13 +43,22 @@ const ProductCard = ({
         </div>
       </div>
       <CardBody className="text-left">
-        <Typography as="a" variant="h6" className="mb-2 font-semibold text-black text-base" href={`/shop/${id}`}>
+        <Typography as="a" variant="h6" className="font-semibold text-black text-base" href={`/shop/${id}`}>
           {title}
         </Typography>
-        <Typography variant="h6" className="mb-2 font-normal text-black capitalize">
+        <Typography variant="h6" className="font-normal text-black capitalize">
           {category}
         </Typography>
-        <Typography className="text-purple">{price.toFixed(2)} $  <span>{discountPercentage}</span></Typography>
+        <div className="flex gap-3 items-center">
+          {
+            discountPercentage ?
+              <>
+                <h6 className="flex gap-1 text-purple-600 align-center font-semibold">${price - (price * discountPercentage / 100)}</h6>
+                <p className="font-normal line-through">${price}</p>
+              </>
+              : <p className="font-normal">${price}</p>
+          }
+        </div>
       </CardBody>
     </Card>
   )

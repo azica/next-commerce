@@ -3,22 +3,19 @@ import { IconButton, Typography } from "@material-tailwind/react"
 import { Minus, Plus, TrashCan } from "akar-icons"
 import Image from "next/image"
 
+import useCartItems from "@/store/useCartItems"
+
 const tableHead = ["Products", "", "Price", "Quantity", "Subtotal", ""]
 
-const CheckoutItems = (
-    { cartList, deleteHandle, changeHandle }:
-        {
-            cartList: ({ quantity: number } & Model.Product)[]; deleteHandle: (id: number) => void;
-            changeHandle: (id: number, operation: string) => void
-        }
-) => {
+const CheckoutItems = () => {
+    const { cartList, addToCart, removeFromCart, subtractFromCart } = useCartItems()
 
     return <table className="w-full">
         <thead>
             <tr>
-                {tableHead.map((head) => (
+                {tableHead.map((head, idx) => (
                     <th
-                        key={head}
+                        key={head + idx}
                         className="border-b border-blue-gray-100 pb-2 px-0"
                     >
                         <Typography
@@ -36,10 +33,10 @@ const CheckoutItems = (
                 const classes = isLast
                     ? "py-4"
                     : "py-4 border-b border-blue-gray-50";
-                return <tr key={el.title}>
+                return <tr key={el.title + index}>
                     <td className={classes}>
-                        <div className="w-20 h-20 shrink-0">
-                        {el.thumbnail ? <Image src={el.thumbnail} alt={el.title} layout="fill" objectFit="cover" /> : null}
+                        <div className="w-20 h-20 shrink-0 relative overflow-hidden">
+                            {el.thumbnail ? <Image src={el.thumbnail} alt={el.title} layout="fill" objectFit="cover" /> : null}
                         </div>
                     </td>
                     <td className={classes}>
@@ -58,12 +55,12 @@ const CheckoutItems = (
                     <td className={classes}>
                         <div className="inline-flex items-stretch h-8">
                             <button className="rounded-l-md px-2 text-gray-900 hover:bg-gray-300 border border-r-0 border-black cursor-pointer outline-none"
-                                onClick={() => changeHandle(el.id, "subtract")}>
+                                onClick={() => subtractFromCart(el.id)}>
                                 <Minus strokeWidth={1.5} size={16} />
                             </button>
                             <div className="text-sm w-full text-center border border-black border-r-0 border-l-0 min-w-4 leading-7">{el.quantity}</div>
                             <button className="rounded-r-md px-2 text-gray-900 hover:bg-gray-300 border border-l-0 border-black cursor-pointer outline-none"
-                                onClick={() => changeHandle(el.id, "add")}>
+                                onClick={() => addToCart(el)}>
                                 <Plus strokeWidth={1.5} size={16} />
                             </button>
                         </div>
@@ -72,7 +69,7 @@ const CheckoutItems = (
                         ${el.price * el.quantity}
                     </td>
                     <td className={classes}>
-                        <IconButton variant="text" onClick={() => deleteHandle(el.id)}>
+                        <IconButton variant="text" onClick={() => removeFromCart(el.id)}>
                             <TrashCan strokeWidth={1.5} size={20} color="red" />
                         </IconButton>
                     </td>

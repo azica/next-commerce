@@ -4,20 +4,29 @@ import { Input, List, ListItem } from "@material-tailwind/react"
 import { Search as SearchIcon } from "akar-icons"
 import Link from "next/link"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { ChangeEvent, Suspense } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 
 import { useSearchedProducts } from "@/services/getSearchedProducts"
 
-import Spinner from "./Spinner"
+import Spinner from "../ui/Spinner"
 
 const Search = ({ handleOpen }: { handleOpen: () => void }) => {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const { replace } = useRouter();
+    const [isLoading, setIsLoading] = useState(false);
 
-    const { products, isLoading, error } = useSearchedProducts<Model.Product[]>();
+    const { products } = useSearchedProducts<Model.Product[]>();
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 500);
+        return () => clearTimeout(timer)
+    }, [products]);
 
     const handleSearch = (term: string) => {
+        setIsLoading(true)
         const params = new URLSearchParams(searchParams);
         if (term) {
             params.set('query', term);
@@ -32,7 +41,7 @@ const Search = ({ handleOpen }: { handleOpen: () => void }) => {
     }
 
     return (
-        <div>
+        <div className="flex flex-col justify-center">
             <div className="w-full my-10">
                 <Input
                     defaultValue={searchParams.get('query')?.toString()}
@@ -43,15 +52,17 @@ const Search = ({ handleOpen }: { handleOpen: () => void }) => {
                     size="lg"
                 />
             </div>
-            <Suspense fallback={<Spinner />}>
-                <List>
-                    {products.map((product) => (
-                        <Link href={`/shop/${product.id}`} key={product.id} onClick={handleOpen}>
-                            <ListItem>{product.title}</ListItem>
-                        </Link>
-                    ))}
-                </List>
-            </Suspense>
+            {
+                isLoading ? <Spinner />
+                    : <List>
+
+                        {products.map((product) => (
+                            <Link href={`/shop/${product.id}`} key={product.id} onClick={handleOpen}>
+                                <ListItem>{product.title}</ListItem>
+                            </Link>
+                        ))}
+                    </List>
+            }
 
         </div>
     )
