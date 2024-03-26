@@ -1,6 +1,10 @@
-import { AuthOptions } from "next-auth"
+import { AuthOptions, getServerSession } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
+
+import { API_AUTH } from "@/shared/constants"
+import { getProfile, refreshAccessToken } from "@/shared/helpers/auth"
+
 
 export const authConfig: AuthOptions = {
   providers: [
@@ -17,18 +21,25 @@ export const authConfig: AuthOptions = {
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
-        const res = await fetch("https://api.escuelajs.co/api/v1/auth/login", {
-          method: 'POST',
-          body: JSON.stringify(credentials),
-          headers: { "Content-Type": "application/json" }
-        })
-        const user = await res.json()
+        try {
+          const res = await fetch(`${API_AUTH}/auth/login`, {
+            method: 'POST',
+            body: JSON.stringify(credentials),
+            headers: { "Content-Type": "application/json" }
+          })
+          const user = await res.json()
 
-        console.log(user)
-        if (res.ok && user) {
-          return user
+          if (!res.ok) {
+            throw new Error(user.message || "Signin is failed")
+          }
+          const accessTokenExpires = Date.now() + (1 * 60 * 60 * 1000);
+          return {
+            ...user,
+            accessTokenExpires
+          }
+        } catch (error: any) {
+          throw new Error(error.message || "Signin is failed")
         }
-        return null
       },
     }),
     CredentialsProvider({
@@ -41,16 +52,23 @@ export const authConfig: AuthOptions = {
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
-        const res = await fetch("https://api.escuelajs.co/api/v1/users/", {
-          method: 'POST',
-          body: JSON.stringify({ ...credentials, avatar: "https://picsum.photos/800" }),
-          headers: { "Content-Type": "application/json" }
-        })
-        const user = await res.json()
-        if (res.ok && user) {
+
+        try {
+          const res = await fetch(`${API_AUTH}/users`, {
+            method: 'POST',
+            body: JSON.stringify({ ...credentials, avatar: "https://picsum.photos/800" }),
+            headers: { "Content-Type": "application/json" }
+          })
+          const user = await res.json()
+
+          if (!res.ok) {
+            throw new Error(user.message || "Signup is failed")
+          }
           return user
+        } catch (error: any) {
+          throw new Error(error.message || "Signup is failed")
         }
-        return null
+
       },
     }),
   ],
@@ -59,36 +77,35 @@ export const authConfig: AuthOptions = {
   },
   callbacks: {
     async jwt({ token, user, account }) {
-      // If the token is expired, refresh it
-      if (user && token && Math.floor(Date.now() / 1000) > (account?.expires_at || token.exp - 60)) {
-        try {
-          const res = await fetch("URL_TO_REFRESH_TOKEN_ENDPOINT", {
-            method: 'POST',
-            headers: {
-              "Content-Type": "application/json",
-              // Add your authorization header if needed
-            },
-            body: JSON.stringify({ refreshToken: token.refreshToken }), // Send the refresh token
-          })
-          const data = await res.json()
-          if (res.ok && data) {
-            // Update the token with the refreshed one
-            return {
-              ...token,
-              ...data
-            }
-          }
-        } catch (error) {
-          // Handle error
-          console.error("Error refreshing token:", error)
-        }
+
+      if (token && typeof token.accessTokenExpires === 'number' && token.accessTokenExpires > Date.now()) {
+        return token; // Token is still valid, no need to refresh
       }
-      return token
+      const session = await getServerSession();
+      const accessToken = await refreshAccessToken(session?.user?.refresh_token as string);
+      if (accessToken) {
+        return {
+          ...token,
+          ...user,
+          accessToken,
+          accessTokenExpires: Date.now() + (1 * 60 * 60 * 1000)
+        };
+      } else {
+        return {
+          ...token,
+          ...user
+        };
+      }
+
     },
     async session({ session, token }) {
-      session.user = token as any
-
+      if (token && token.access_token) {
+        const user = await getProfile(token.access_token as string);
+        session.user = user;
+      }
+      console.log("token", session)
       return session;
     },
-  }
+  },
 }
+

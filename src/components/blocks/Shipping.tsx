@@ -6,15 +6,9 @@ import { addressValues } from "@/shared/mockdata/mockdata";
 
 import Form from './Form'
 
-type FormValues = {
-    name: string;
-    mobileNumber: string;
-    address: string;
-};
-
 const Shipping = () => {
 
-    const submitHandle = (data: FormValues) => {
+    const submitHandle = (data: AddressValues) => {
         console.log(data)
     }
 

@@ -12,6 +12,7 @@ interface ProvidersProps {
 }
 
 const Providers = ({ children, session }: ProvidersProps) => {
+
   return (
     <SessionProvider session={session}>
       <ThemeProvider value={customTheme}>

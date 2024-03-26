@@ -6,13 +6,7 @@ import { usePathname, useRouter } from "next/navigation"
 import { useState } from "react"
 
 import { useCreateQueryString } from "@/hooks/useCreateQueryString"
-
-const filter = [
-  { value: "latest", label: "Sort by latest" },
-  { value: "newest", label: "Sort by newest" },
-  { value: "a-b", label: "Sort by A - B" },
-  { value: "b-a", label: "Sort by B - A" },
-]
+import { sortOptions } from "@/shared/mockdata/mockdata"
 
 const Sort = () => {
   const [value, setValue] = useState<string>("latest")
@@ -36,7 +30,7 @@ const Sort = () => {
       </div>
       <div className="max-w-[300px]">
         <Select variant="static" value={value} onChange={(val) => changeHandle(String(val))}>
-          {filter?.map((option) => (
+          {sortOptions?.map((option) => (
             <Option key={option.value} value={option.value}>
               {option.label}
             </Option>

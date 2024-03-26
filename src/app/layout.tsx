@@ -6,6 +6,8 @@ import "../assets/styles/globals.css"
 
 import { Metadata } from "next/types";
 import { Session } from "next-auth"
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import FooterFeatures from "@/components/blocks/FooterFeatures";
 import Footer from "@/components/layout/Footer";
@@ -36,11 +38,24 @@ export default function RootLayout({
         <Providers session={session}>
           <Header />
           <main className="min-h-screen">
-           {children}
+            {children}
           </main>
           <FooterFeatures />
           <Footer />
         </Providers>
+        <ToastContainer
+          position="bottom-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        // transition: "Slide"
+        />
       </body>
     </html>
   )

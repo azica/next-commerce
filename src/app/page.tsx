@@ -10,10 +10,10 @@ const Home = () => {
   return (
     <>
       <Hero />
-      <Suspense fallback={<Loading />}>
+      {/* <Suspense fallback={<Loading />}>
         <ShopByCategories />
         <BestSeller />
-      </Suspense>
+      </Suspense> */}
     </>
   )
 }

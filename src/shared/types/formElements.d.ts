@@ -39,6 +39,11 @@ declare global {
     };
   };
 
+  type Option = {
+    id?: number | string;
+    name: string;
+    value: number | string;
+  }
   type InputData = {
     validations: Validations;
     id: number;
@@ -52,11 +57,7 @@ declare global {
     readOnly?: boolean;
     invalid?: boolean;
     required?: boolean;
-    options?: {
-      id?: number | string;
-      name: string;
-      value: number | string;
-    }[];
+    options?: Option[];
     mask?: string;
     maskProps?: {
       maskChar?: string | null;

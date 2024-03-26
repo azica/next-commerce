@@ -3,7 +3,7 @@ import useSWR, { SWRResponse } from "swr";
 
 export const useAllCategories = () => {
   const { data, error }: SWRResponse<string[], ErrorResponse> = useSWR("categories", getAllCategories);
-  
+
   return {
     categories: data,
     isLoading: !error && !data,

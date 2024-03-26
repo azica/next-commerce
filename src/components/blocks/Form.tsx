@@ -1,14 +1,7 @@
-import { Typography, Input, Button } from '@material-tailwind/react'
-import { FieldValues, Path, useForm } from 'react-hook-form'
+"use client"
+import { Typography, Input, Button, Select, Option } from '@material-tailwind/react'
+import { Controller, FieldValues, Path, useForm } from 'react-hook-form'
 import InputMask from 'react-input-mask';
-
-type FormProps<T> = {
-    values: InputData[];
-    onSubmit: (data: T) => void;
-    buttonLoading: boolean;
-    buttonName: string;
-    gridCols?: string;
-}
 
 const Form = <T extends FieldValues>({
     values,
@@ -21,6 +14,7 @@ const Form = <T extends FieldValues>({
     const {
         register,
         handleSubmit: onSubmitForm,
+        control,
         formState: { errors },
     } = useForm<T>();
 
@@ -31,21 +25,31 @@ const Form = <T extends FieldValues>({
                     <div key={input.id + input.field} className={`relative ${input.className}`}>
                         <Typography className="mb-2 font-medium text-x text-primary-500">{input.label}</Typography>
                         {input.mask ? (
-                            <InputMask
-                                mask={input.mask}
-                                type={input.type}
-                                placeholder={input.placeholder}
+                            <Controller
                                 {...register(input.field as Path<T>, input.validations)}
-                            >
-                                <Input
-                                    className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-                                    labelProps={{
-                                        className: "before:content-none after:content-none",
-                                    }}
-                                    size="lg"
+                                control={control}
+                                render={({ field: { onChange, value } }) => (
+                                    <InputMask mask={input.mask!} value={value} onChange={onChange}>
+                                        <Input
+                                            className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+                                            labelProps={{
+                                                className: "before:content-none after:content-none",
+                                            }}
+                                            size="lg"
 
-                                />
-                            </InputMask>
+                                        />
+                                    </InputMask>
+                                )}
+                            />
+                        ) : input.type === "select" ? (
+                            <Select
+                                className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+                                labelProps={{
+                                    className: "before:content-none after:content-none",
+                                }}
+                            >
+                                {input.options?.map((option, idx) => (<Option key={idx}>{option.name}</Option>))}
+                            </Select>
                         ) : (
                             <Input
                                 {...register(input.field as Path<T>, input.validations)}

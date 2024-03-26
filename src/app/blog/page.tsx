@@ -1,5 +1,6 @@
 import type { Metadata } from "next/types"
 
+import Container from "@/components/layout/Container"
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -7,9 +8,11 @@ export const metadata: Metadata = {
 }
 const Blog = () => {
 
-  return <div> blog</div>
+  return (
+    <Container>
+      <h2>Blog</h2>
+    </Container>
+  )
 }
-
-
 
 export default Blog

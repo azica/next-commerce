@@ -1,5 +1,4 @@
 "use client"
-import type { FC } from "react"
 
 import { Input, Checkbox, Button, Typography, Spinner } from "@material-tailwind/react"
 import { EyeSlashed, EyeOpen } from "akar-icons"
@@ -7,25 +6,11 @@ import { useRouter } from "next/navigation"
 import { signIn } from "next-auth/react"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
+import { toast } from 'react-toastify';
 
 import { GoogleButton } from "./GoogleButton"
 
-
-type FormValues = {
-  email: string;
-  password: string;
-  name: string;
-};
-
-type AuthForm = {
-  inputs: InputData[];
-  buttonText: string;
-  hasAccount: boolean;
-  setHasAccount: () => void;
-  setForgetPassword: () => void;
-  forgetPassword: boolean;
-};
-const AuthForm: FC<AuthForm> = ({ hasAccount, setHasAccount, inputs, buttonText, setForgetPassword, forgetPassword }) => {
+const AuthForm: AuthForm = ({ hasAccount, setHasAccount, inputs, buttonText, setForgetPassword, forgetPassword }) => {
   const router = useRouter()
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -33,7 +18,7 @@ const AuthForm: FC<AuthForm> = ({ hasAccount, setHasAccount, inputs, buttonText,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>()
+  } = useForm<AuthValues>()
 
   const toggleIcon = () => {
     return showPassword ? (
@@ -43,7 +28,7 @@ const AuthForm: FC<AuthForm> = ({ hasAccount, setHasAccount, inputs, buttonText,
     )
   }
 
-  const submitHandle = async (data: FormValues) => {
+  const submitHandle = async (data: AuthValues) => {
     setIsLoading(true)
     try {
       const response = hasAccount ?
@@ -59,9 +44,15 @@ const AuthForm: FC<AuthForm> = ({ hasAccount, setHasAccount, inputs, buttonText,
           redirect: false,
         })
 
-      response && response.status === 200 && router.push('/')
+      if (response && response.status === 200) {
+        router.push('/');
+        toast.success('Login successful.');
+      } else {
+        toast.error(`${response?.error} "Please try again."`);
+      }
+
     } catch (error) {
-      console.log(error)
+      toast.error('An error occurred. Please try again.');
     } finally {
       setIsLoading(false)
     }
@@ -77,7 +68,7 @@ const AuthForm: FC<AuthForm> = ({ hasAccount, setHasAccount, inputs, buttonText,
               <>
                 <Typography className="mb-2 font-medium text-xs text-primary-500">{input.label}</Typography>
                 <Input
-                  {...register(input.field as keyof FormValues, input.validations)}
+                  {...register(input.field as keyof AuthValues, input.validations)}
                   size="lg"
                   name={input.field}
                   type={input.type === "password" ? (showPassword ? "text" : "password") : input.type}
@@ -103,9 +94,9 @@ const AuthForm: FC<AuthForm> = ({ hasAccount, setHasAccount, inputs, buttonText,
                 containerProps={{ className: "-ml-3" }}
               />
             )}
-            {errors?.[input.field as keyof FormValues] && (
+            {errors?.[input.field as keyof AuthValues] && (
               <Typography className="text-purple-400 text-xs absolute -bottom-5 transition-all duration-300">
-                {errors[input.field as keyof FormValues]?.message}
+                {errors[input.field as keyof AuthValues]?.message}
               </Typography>
             )}
           </div>
@@ -126,8 +117,8 @@ const AuthForm: FC<AuthForm> = ({ hasAccount, setHasAccount, inputs, buttonText,
       <GoogleButton />
       <Typography className="mt-4 text-center font-normal">
         Already have an account?
-        <a href="#" className="font-semibold text-gray-900 ml-1" onClick={setHasAccount}>
-          Sign In
+        <a className="font-semibold text-gray-900 ml-1 cursor-pointer" onClick={setHasAccount}>
+          {hasAccount ? "Sign Up" : "Sign In"}
         </a>
       </Typography>
     </form>

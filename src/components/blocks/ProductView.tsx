@@ -1,6 +1,3 @@
-
-import { Percentage } from "akar-icons"
-
 import Rating from "./Rating"
 import ThumbsGallery from "./ThumbsGallery"
 import ColorsList from "../ui/ColorsList"

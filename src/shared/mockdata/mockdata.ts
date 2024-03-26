@@ -222,8 +222,11 @@ export const creditCardValues: InputData[] = [
   }
 ]
 
+export const countries = [
+  { name: "Afghanistan", value: "Afghanistan" }, { name: "Aland Islands", value: "AlandIslands" }, { name: "Albania", value: "Albania" }, { name: "Barbados", value: "Barbados" }
+];
 
-export const addressValues = [
+export const addressValues: InputData[] = [
   {
     id: 1,
     value: "",
@@ -250,21 +253,60 @@ export const addressValues = [
     validations: {
       required: "Mobile number is required.",
     },
-    className: "col-span-1"
+    className: "col-span-1",
+    mask: "+7 999 999 99 99",
   },
   {
     id: 3,
+    value: "",
+    field: "zipCode",
+    placeholder: "Enter Zip Code",
+    type: "text",
+    required: true,
+    label: "Zip Code",
+    autoComplete: "off",
+    validations: {
+      required: "Zip code number is required.",
+      minLength: {
+        value: 4,
+        message: "Zip Code must be at least 4 characters.",
+      },
+      maxLength: {
+        value: 6,
+        message: "Zip Code cannot exceed 6 characters.",
+      },
+    },
+    className: "col-span-1",
+    mask: "999999"
+  },
+  {
+    id: 4,
+    value: "",
+    field: "country",
+    placeholder: "Country",
+    type: "select",
+    required: true,
+    label: "Enter Country",
+    autoComplete: "off",
+    validations: {
+      required: "Country is required.",
+    },
+    options: countries,
+    className: "col-span-2"
+  },
+  {
+    id: 5,
     value: "",
     field: "address",
     placeholder: "Address",
     type: "tel",
     required: true,
-    label: "Enter Address",
+    label: "Address",
     autoComplete: "off",
     validations: {
       required: "Address is required.",
     },
-    className: "col-span-1"
+    className: "col-span-2"
   },
 ]
 
@@ -272,4 +314,11 @@ export const steps = [
   { title: "Shipping Address", icon: HomeAlt1, link: "shipping" },
   { title: "Payment Method", icon: CreditCardAlt1, link: "payment" },
   { title: "Review Your Order", icon: Receipt, link: "review" },
+]
+
+export const sortOptions = [
+  { value: "latest", label: "Sort by latest" },
+  { value: "newest", label: "Sort by newest" },
+  { value: "a-b", label: "Sort by A - B" },
+  { value: "b-a", label: "Sort by B - A" },
 ]

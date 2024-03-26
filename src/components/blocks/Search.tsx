@@ -6,7 +6,7 @@ import Link from "next/link"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { ChangeEvent, useEffect, useState } from "react"
 
-import { useSearchedProducts } from "@/services/getSearchedProducts"
+import { useSearchedProducts } from "@/services/useSearchedProducts"
 
 import Spinner from "../ui/Spinner"
 

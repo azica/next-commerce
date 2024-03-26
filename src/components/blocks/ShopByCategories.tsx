@@ -7,7 +7,7 @@ import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 
-import { useAllProducts } from "@/services/getProducts"
+import { useAllProducts } from "@/services/useProducts"
 
 import ProductCard from "./ProductCard"
 import Container from "../layout/Container"

@@ -3,7 +3,7 @@ import { List, ListItem, ListItemPrefix, Typography, Radio } from "@material-tai
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
-import { useAllCategories } from "@/services/getCategories";
+import { useAllCategories } from "@/services/useCategories";
 
 const FilterByCategories = () => {
   const searchParams = useSearchParams()

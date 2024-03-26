@@ -3,14 +3,9 @@ import { FC } from "react";
 export declare global {
   type size = "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
 
-  type Modal = FC<{
-    open: boolean;
-    handleOpen: () => void;
-    size?: size;
-    header?: ReactNode;
-    footer?: ReactNode;
-    children: ReactNode;
-  }>;
+  type Object = {
+    [string]: any;
+  }
 
   type ResponseSuccess = {
     status: string;
@@ -41,12 +36,15 @@ export declare global {
 
   namespace Model {
     type User = {
+      id?: number;
       name: string;
       email: string;
-      password: string;
-      id?: number;
       avatar?: string;
       role?: string;
+      accessTokenExpires: number
+      access_token: string;
+      refresh_token: string;
+
     };
 
     type Product = {
@@ -68,7 +66,7 @@ export declare global {
     type Tokens = {
       access_token: string;
       refresh_token: string;
-      exp: string;
+      expires: string;
     };
 
     type GetProducts = {

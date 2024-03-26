@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-import { useAllProducts } from "@/services/getProducts";
+import { useAllProducts } from "@/services/useProducts";
 
 import ProductCard from "./ProductCard";
 

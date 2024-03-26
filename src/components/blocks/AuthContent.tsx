@@ -12,13 +12,6 @@ import logo from "@/assets/images/Logo.png"
 import AuthForm from "@/components/blocks/AuthForm"
 import { authData } from "@/shared/mockdata/mockdata"
 
-type AuthFormData = {
-  title: string;
-  subtitle: string;
-  buttonText: string;
-  inputs: InputData[];
-};
-
 const AuthContent = () => {
   const [hasAccount, setHasAccount] = useState(false)
   const [forgetPassword, setForgetPassword] = useState(false)
@@ -40,7 +33,7 @@ const AuthContent = () => {
   return (
     <div className="relative h-lvh flex items-stretch">
       <div className="w-1/2 flex">
-        <Image src={register} alt="auth" className="w-full h-full object-cover" />
+        <Image src={register} alt="auth" className="w-full h-full object-cover" priority />
       </div>
       <div className="w-1/2 flex justify-center items-center h-full ml-auto my-auto">
         <Link href="/" className="absolute top-5 left-5 inline-block">

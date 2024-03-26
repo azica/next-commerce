@@ -1,20 +1,42 @@
 "use client"
 import { Button, IconButton } from "@material-tailwind/react"
 import { Cart, Heart, Search as SearchIcon } from "akar-icons"
-import { signOut, useSession } from "next-auth/react"
+import { signOut, useSession, signIn } from "next-auth/react"
 import { useEffect, useState } from "react"
 
 import CartDrawer from "@/components/blocks/Cart"
+import { getProfile } from "@/shared/helpers/auth"
 
 import Search from "../blocks/Search"
 import Modal from "../ui/Modal"
 
 
 const HeaderActions = () => {
-  const session = useSession()
+  const { data: session, update } = useSession()
+
+  // useEffect(() => {
+  //   const fetchProfile = async () => {
+  //     try {
+  //       if (session?.error === "RefreshAccessTokenError") {
+  //         signIn();
+  //       }
+  //       if (!session?.user) {
+  //         const user = await getProfile(); // Call getProfile function to fetch user profile
+  //         update({ user }); // Update session with fetched user data
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching user profile:", error);
+  //     }
+  //   };
+
+  //   fetchProfile(); // Call the asynchronous function to fetch user profile
+  // }, [session, update]);
+  console.log(session)
+
   const [showCart, setShowCart] = useState(false)
   const [showSearchBar, setShowSearchBar] = useState(false)
   const [productQuantity, setProductQuantity] = useState(0)
+
 
   useEffect(() => {
     const cartList = localStorage.getItem("cartList")
@@ -67,12 +89,12 @@ const HeaderActions = () => {
         </IconButton>
       ))}
       <CartDrawer open={showCart} toggleDrawer={toggleDrawer} />
-      {session?.data ? (
-        <Button onClick={() => signOut({ callbackUrl: "/" })}>Sing Out</Button>
-      ) : (
+      {session === null || session === undefined ? (
         <a href="/signin">
           <Button>Sing In</Button>
         </a>
+      ) : (
+        <Button onClick={() => signOut({ callbackUrl: "/" })}>Sing Out</Button>
       )}
       <Modal open={showSearchBar} handleOpen={() => setShowSearchBar(!showSearchBar)}>
         <Search handleOpen={() => setShowSearchBar(!showSearchBar)} />

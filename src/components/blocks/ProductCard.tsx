@@ -31,8 +31,7 @@ const ProductCard = ({
   return (
     <Card className={`group/item hover:bg-gray-100 transition-all duration-300 w-full cursor-pointer h-full ${className}`}>
       <div className="relative h-[275px] p-3">
-        {/* {images.length > 0 ? <img src={images[0].replace(/^["\\[]|["\\]$/g, "").replace(/^"/, "")} alt={title} className="w-full h-full object-cover" /> : null} */}
-        {thumbnail ? <Image src={thumbnail} alt={title} layout="fill" objectFit="cover" /> : null}
+        {thumbnail ? <Image src={thumbnail} alt={title} fill /> : null}
         <div className="transition-all duration-300 invisible flex flex-col gap-5 text-black absolute top-4 right-3 group-hover/item:visible">
           <SocialLinks />
         </div>
