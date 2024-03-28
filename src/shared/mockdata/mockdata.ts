@@ -328,7 +328,7 @@ export const sideBar = [
   { icon: Person, label: "Personal Information", link: "dashboard" },
   { icon: ShippingBoxV1, label: "My Orders", link: "orders" },
   { icon: Heart, label: "My WishList", link: "wishlist" },
-  { icon: Location, label: "Manage Addresses", link: "address" },
+  { icon: Location, label: "Manage Addresses", link: "addresses" },
   { icon: CreditCardAlt1, label: "Saved Cards", link: "cards" },
   { icon: Bell, label: "Notifications", link: "notifications" },
   { icon: Gear, label: "Settings", link: "settings" },
