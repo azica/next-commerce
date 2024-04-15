@@ -1,27 +1,14 @@
 "use client"
-
 import { Tabs, TabsHeader, Tab, TabsBody, TabPanel } from "@material-tailwind/react";
 import { useState } from "react";
+
+import { tabsData } from "@/shared/mockdata/mockdata";
 
 const tabsHeader = ["Descriptions", "Additional Information", "Reviews"];
 
 const ProductTab = () => {
     const [activeTab, setActiveTab] = useState("Descriptions");
 
-    const tabsData = [
-        {
-            label: "Descriptions",
-            desc: <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia nobis totam corporis eligendi earum modi adipisci repellendus ex maxime quisquam.</p>
-        },
-        {
-            label: "Additional Information",
-            desc: <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia nobis totam corporis eligendi earum modi adipisci repellendus ex maxime quisquam.</p>
-        },
-        {
-            label: "Reviews",
-            desc: <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia nobis totam corporis eligendi earum modi adipisci repellendus ex maxime quisquam.</p>
-        },
-    ]
     return (
         <Tabs value={activeTab}>
             <TabsHeader

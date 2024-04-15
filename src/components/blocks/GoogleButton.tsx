@@ -1,5 +1,4 @@
 "use client"
-
 import { Button } from "@material-tailwind/react"
 import { useSearchParams } from "next/navigation"
 import { signIn } from "next-auth/react"

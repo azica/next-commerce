@@ -13,8 +13,10 @@ const SideBar = () => {
                     <ListItemPrefix>
                         <IconWrapper icon={el.icon} />
                     </ListItemPrefix>
-                    <Link href={`/admin/${el.link}`}>
-                        {el.label}
+                    <Link href={el.link === "dashboard" ? el.link : `/customer/${el.link}`}>
+                        <a>
+                            {el.label}
+                        </a>
                     </Link>
                 </ListItem>
             ))}

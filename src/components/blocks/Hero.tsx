@@ -1,5 +1,4 @@
 "use client"
-
 import { Button, Typography } from "@material-tailwind/react"
 import Image from "next/image"
 
@@ -9,9 +8,9 @@ import Container from "../layout/Container"
 
 const Hero = () => {
   return (
-    <div className="relative min-h-screen bg-gray-100">
-      <Container className="flex h-lvh">
-        <div className="w-1/2 my-auto">
+    <div className="relative sm:min-h-screen bg-gray-100">
+      <Container className="flex sm:h-lvh flex-col sm:flex-row">
+        <div className="md:w-1/2 w-full my-auto py-10 sm:py-0">
           <Typography variant="h2" className="font-normal text-primary mb-5">
             Classic Exclusive
           </Typography>
@@ -27,7 +26,7 @@ const Hero = () => {
             </Button>
           </a>
         </div>
-        <div className="flex border-white border-[15px] w-[400px] h-[500px] m-auto skew-y-6">
+        <div className="flex border-white border-[15px] w-full sm:w-[400px] h-[300px] md:h-[500px] m-auto skew-y-6 my-10 sm:my-auto">
           <Image src={homeHero} alt="hero" className="w-[450px] my-auto h-full object-cover" />
         </div>
       </Container>

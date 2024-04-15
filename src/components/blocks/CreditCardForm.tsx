@@ -1,5 +1,5 @@
 
-import { creditCardValues } from "@/shared/mockdata/mockdata";
+import { creditCardValues } from "@/shared/mockdata/formData";
 
 import Form from "./Form";
 

@@ -1,23 +1,24 @@
 "use client"
 import { Button, IconButton } from "@material-tailwind/react"
-import { Cart, Heart, Person, Search as SearchIcon } from "akar-icons"
-import { signOut, useSession, signIn } from "next-auth/react"
+import { Cart, Heart, Search as SearchIcon } from "akar-icons"
+import { useSession } from "next-auth/react"
 import { useEffect, useState } from "react"
 
 import CartDrawer from "@/components/blocks/Cart"
-import { getProfile } from "@/shared/helpers/auth"
 
+import ProfileMenu from "./ProfileMenu"
 import Search from "../blocks/Search"
 import Modal from "../ui/Modal"
 
 const HeaderActions = () => {
-  const { data: session, status } = useSession()
+  const { data: session } = useSession()
 
   console.log("header", session)
 
   const [showCart, setShowCart] = useState(false)
   const [showSearchBar, setShowSearchBar] = useState(false)
   const [productQuantity, setProductQuantity] = useState(0)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 
   useEffect(() => {
@@ -43,7 +44,7 @@ const HeaderActions = () => {
 
   const actions = [
     {
-      icon: <SearchIcon className="text-primary-500" />,
+      icon: <SearchIcon className="text-primary-500 hidden sm:inline-block" />,
       handle: () => searchHandle(),
     },
     {
@@ -64,26 +65,26 @@ const HeaderActions = () => {
   ]
 
   return (
-    <div className="flex gap-3 items-center">
+    <div className="flex gap-3 items-center relative md:ml-0 ml-auto">
       {actions.map((button, idx) => (
         <IconButton key={idx} className="bg-transparent shadow-none" onClick={button.handle}>
           {button.icon}
         </IconButton>
       ))}
+
       <CartDrawer open={showCart} toggleDrawer={toggleDrawer} />
+
       {session && session.user ? (
-        <div className="flex gap-1 items-center">
-          <p>Hi {session.user.name}</p>
-          <Person strokeWidth={1.5} size={20} />
-        </div>
-      ) : null}
-      {!session ? (
+          <ProfileMenu
+            user={session.user}
+            isMenuOpen={isMenuOpen}
+            setIsMenuOpen={setIsMenuOpen} />
+      ) : (
         <a href="/signin">
           <Button>Sign In</Button>
         </a>
-      ) : (
-        <Button onClick={() => signOut({ callbackUrl: "/" })}>Sign Out</Button>
       )}
+
       <Modal open={showSearchBar} handleOpen={() => setShowSearchBar(!showSearchBar)}>
         <Search handleOpen={() => setShowSearchBar(!showSearchBar)} />
       </Modal>

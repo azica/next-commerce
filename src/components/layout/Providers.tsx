@@ -1,5 +1,4 @@
 "use client"
-
 import { ThemeProvider } from "@material-tailwind/react"
 import { Session } from "next-auth"
 import { SessionProvider } from "next-auth/react"

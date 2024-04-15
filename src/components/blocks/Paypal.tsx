@@ -1,3 +1,4 @@
+"use client"
 import { Typography, Button } from "@material-tailwind/react"
 
 const Paypal = () => {

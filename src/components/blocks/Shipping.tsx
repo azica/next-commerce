@@ -1,8 +1,7 @@
 "use client"
-
 import { Typography } from "@material-tailwind/react"
 
-import { addressValues } from "@/shared/mockdata/mockdata";
+import { addressValues } from "@/shared/mockdata/formData"
 
 import Form from './Form'
 

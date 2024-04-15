@@ -1,6 +1,6 @@
 import { API_DUMMY } from "@/shared/constants";
 
-export async function GET(req: Request, res: Response) {
+export async function GET() {
   try {
     const response = await fetch(`${API_DUMMY}/products/categories`)
     if (!response.ok) {

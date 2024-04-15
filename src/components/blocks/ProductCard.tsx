@@ -33,7 +33,7 @@ const ProductCard = ({
   return (
     <Card className={`group/item hover:bg-gray-100 transition-all duration-300 w-full cursor-pointer h-full ${className}`}>
       <div className="relative h-[275px] p-3">
-        {thumbnail ? <Image src={thumbnail} alt={title} fill /> : null}
+        {thumbnail ? <Image src={thumbnail} alt={title} fill className="object-cover" /> : null}
         <div className="transition-all duration-300 invisible flex flex-col gap-5 text-black absolute top-4 right-3 group-hover/item:visible">
           <SocialLinks />
         </div>

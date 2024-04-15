@@ -54,7 +54,7 @@ const AuthContent = () => {
             {authForm.title}
           </Typography>
           <Typography className="mt-1 font-normal text-gray-500">{authForm.subtitle}</Typography>
-          <AnimatePresence mode="wait">
+          <AnimatePresence>
             <motion.div
               key={hasAccount ? "login" : "register"}
               initial={{ opacity: 0 }}

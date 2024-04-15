@@ -1,4 +1,12 @@
-import { HomeAlt1, CreditCardAlt1, Receipt, Person, Heart, ShippingBoxV1, Bell, Gear, Location } from "akar-icons"
+import { HomeAlt1, CreditCardAlt1, Receipt, Person, Heart, ShippingBoxV1, Bell, Gear, Location, ShippingBoxV2, SignOut } from "akar-icons"
+
+export const menu = [
+  { href: "/shop", label: "Shop" },
+  { href: "/admin", label: "Admin" },
+  { href: "/our-story", label: " Our Story" },
+  { href: "/blog", label: "Blog" },
+  { href: "/contact-us", label: "Contact Us" },
+]
 
 export const authData: Record<string, any> = {
   login: {
@@ -143,173 +151,6 @@ export const paymentMethods = [
   { label: "Cash on Delivery", value: "cash" },
 ]
 
-export const creditCardValues: InputData[] = [
-  {
-    id: 1,
-    value: "",
-    field: "cardNumber",
-    placeholder: "4444 4444 4444 4444",
-    type: "text",
-    required: true,
-    label: "Card Number",
-    autoComplete: "off",
-    mask: "9999 9999 9999 9999",
-    validations: {
-      required: "Card Number is required.",
-      pattern: {
-        value: /^(?:\d{4} ?){4}$/,
-        message: "Invalid card number.",
-      },
-    },
-    className: "col-span-2"
-  },
-  {
-    id: 2,
-    value: "",
-    field: "cardName",
-    placeholder: "Card Name",
-    type: "text",
-    label: "Card Name",
-    autoComplete: "off",
-    validations: {
-      required: "Card Name is required.",
-    },
-    className: "col-span-2"
-  },
-  {
-    id: 3,
-    value: "",
-    field: "expiredDate",
-    placeholder: "MM/YY",
-    mask: "99/99",
-    type: "text",
-    required: true,
-    label: "Expiry Date",
-    autoComplete: "off",
-    validations: {
-      required: "Expiry Date is required.",
-      pattern: {
-        value: /^(0[1-9]|1[0-2])\/([0-9]{2})$/,
-        message: "Invalid expiry date. Please enter in MM/YY format.",
-      },
-    },
-  },
-  {
-    id: 4,
-    value: "",
-    field: "cvv",
-    placeholder: "CVV",
-    type: "text",
-    required: true,
-    label: "CVV",
-    autoComplete: "off",
-    mask: "999",
-    validations: {
-      required: "CVV is required.",
-      minLength: {
-        value: 3,
-        message: "CVV must be at least 3 characters.",
-      },
-      maxLength: {
-        value: 4,
-        message: "CVV cannot exceed 4 characters.",
-      },
-      pattern: {
-        value: /^[0-9]{3,4}$/,
-        message: "Invalid CVV. CVV must be a 3 or 4-digit number.",
-      },
-    },
-  }
-]
-
-export const countries = [
-  { name: "Afghanistan", value: "Afghanistan" }, { name: "Aland Islands", value: "AlandIslands" }, { name: "Albania", value: "Albania" }, { name: "Barbados", value: "Barbados" }
-];
-
-export const addressValues: InputData[] = [
-  {
-    id: 1,
-    value: "",
-    field: "name",
-    placeholder: "Enter Name",
-    type: "text",
-    required: true,
-    label: "Name",
-    autoComplete: "off",
-    validations: {
-      required: "Name is required.",
-    },
-    className: "col-span-2"
-  },
-  {
-    id: 2,
-    value: "",
-    field: "mobileNumber",
-    placeholder: "Enter Mobile Number",
-    type: "tel",
-    required: true,
-    label: "Mobile Number",
-    autoComplete: "off",
-    validations: {
-      required: "Mobile number is required.",
-    },
-    className: "col-span-1",
-    mask: "+7 999 999 99 99",
-  },
-  {
-    id: 3,
-    value: "",
-    field: "zipCode",
-    placeholder: "Enter Zip Code",
-    type: "text",
-    required: true,
-    label: "Zip Code",
-    autoComplete: "off",
-    validations: {
-      required: "Zip code number is required.",
-      minLength: {
-        value: 4,
-        message: "Zip Code must be at least 4 characters.",
-      },
-      maxLength: {
-        value: 6,
-        message: "Zip Code cannot exceed 6 characters.",
-      },
-    },
-    className: "col-span-1",
-    mask: "999999"
-  },
-  {
-    id: 4,
-    value: "",
-    field: "country",
-    placeholder: "Country",
-    type: "select",
-    required: true,
-    label: "Enter Country",
-    autoComplete: "off",
-    validations: {
-      required: "Country is required.",
-    },
-    options: countries,
-    className: "col-span-2"
-  },
-  {
-    id: 5,
-    value: "",
-    field: "address",
-    placeholder: "Address",
-    type: "tel",
-    required: true,
-    label: "Address",
-    autoComplete: "off",
-    validations: {
-      required: "Address is required.",
-    },
-    className: "col-span-2"
-  },
-]
-
 export const steps = [
   { title: "Shipping Address", icon: HomeAlt1, link: "shipping" },
   { title: "Payment Method", icon: CreditCardAlt1, link: "payment" },
@@ -323,7 +164,6 @@ export const sortOptions = [
   { value: "b-a", label: "Sort by B - A" },
 ]
 
-
 export const sideBar = [
   { icon: Person, label: "Personal Information", link: "dashboard" },
   { icon: ShippingBoxV1, label: "My Orders", link: "orders" },
@@ -335,20 +175,39 @@ export const sideBar = [
 
 ]
 
-export const profileValues = [
+export const profileMenuItems = [
   {
-    id: 2,
-    value: "",
-    field: "mobileNumber",
-    placeholder: "Enter Mobile Number",
-    type: "tel",
-    required: true,
-    label: "Mobile Number",
-    autoComplete: "off",
-    validations: {
-      required: "Mobile number is required.",
-    },
-    className: "col-span-1",
-    mask: "+7 999 999 99 99",
+    label: "My Profile",
+    icon: Person,
+    link: "dashboard"
+  },
+  {
+    label: "Edit Profile",
+    icon: Gear,
+    link: "settings"
+  },
+  {
+    label: "Orders",
+    icon: ShippingBoxV2,
+    link: "orders"
+  },
+  {
+    label: "Sign Out",
+    icon: SignOut,
+  },
+];
+
+export const tabsData = [
+  {
+    label: "Descriptions",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit.Officia nobis totam corporis eligendi earum modi adipisci repellendus ex maxime quisquam."
+  },
+  {
+    label: "Additional Information",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit.Officia nobis totam corporis eligendi earum modi adipisci repellendus ex maxime quisquam."
+  },
+  {
+    label: "Reviews",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit.Officia nobis totam corporis eligendi earum modi adipisci repellendus ex maxime quisquam."
   },
 ]

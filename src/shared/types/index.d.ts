@@ -1,5 +1,3 @@
-import { FC } from "react";
-
 export declare global {
   type size = "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
 

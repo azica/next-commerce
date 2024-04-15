@@ -1,3 +1,4 @@
+"use client"
 import { Tooltip, Typography } from "@material-tailwind/react"
 import { Star, ArrowRightLeft, EyeOpen } from "akar-icons"
 import React from "react"

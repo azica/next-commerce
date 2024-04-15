@@ -1,5 +1,4 @@
 "use client"
-
 import { Input, List, ListItem } from "@material-tailwind/react"
 import { Search as SearchIcon } from "akar-icons"
 import Link from "next/link"

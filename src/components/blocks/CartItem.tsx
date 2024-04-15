@@ -1,3 +1,4 @@
+"use client"
 import { Typography, IconButton } from '@material-tailwind/react'
 import { TrashCan } from 'akar-icons'
 import Image from "next/image"
@@ -9,10 +10,9 @@ const CartItem = ({ product }: { product: Model.Product & { quantity: number } }
     const { removeFromCart } = useCartItems()
 
     return (
-
         <div className="flex gap-3 items-stretch">
             <div className="w-20 h-20 shrink-0 overflow-hidden relative">
-                {product.thumbnail ? <Image src={product.thumbnail} alt={product.title} fill /> : null}
+                {product.thumbnail ? <Image src={product.thumbnail} alt={product.title} fill sizes="100%" priority className="object-cover" /> : null}
             </div>
             <div className="flex-1">
                 <Typography variant="h6" className="text-primary-500 font-semibold text-xs">
@@ -34,9 +34,7 @@ const CartItem = ({ product }: { product: Model.Product & { quantity: number } }
             <IconButton variant="text" onClick={() => removeFromCart(product.id)} className="ml-auto">
                 <TrashCan strokeWidth={1.5} size={20} />
             </IconButton>
-
         </div>
-
     )
 }
 

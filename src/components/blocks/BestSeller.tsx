@@ -11,6 +11,21 @@ import { useAllProducts } from "@/services/useProducts"
 import ProductCard from "./ProductCard"
 import Container from "../layout/Container"
 
+const breakpoints = {
+    420: {
+        slidesPerView: 2,
+        spaceBetween: 20,
+    },
+    640: {
+        slidesPerView: 3,
+        spaceBetween: 16,
+    },
+    1024: {
+        slidesPerView: 4,
+        spaceBetween: 16,
+    },
+}
+
 const BestSeller = () => {
     const { products } = useAllProducts<Model.Product[]>({ limit: "30" });
 
@@ -26,8 +41,11 @@ const BestSeller = () => {
                         :
                         <Swiper
                             className="twoRowsSlider"
-                            spaceBetween={16}
-                            slidesPerView={4}
+                            spaceBetween={0}
+                            slidesPerView={1}
+                            breakpoints={{
+                                ...breakpoints
+                            }}
                             grid={{
                                 rows: 2,
                             }}
@@ -40,7 +58,7 @@ const BestSeller = () => {
                         </Swiper>
                 }
             </div>
-        </Container>
+        </Container >
     )
 }
 

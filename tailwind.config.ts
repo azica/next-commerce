@@ -34,12 +34,12 @@ module.exports = withMT({
       },
       typography: {
         h1: {
-          fontWeight: 'bold', // Example font weight for h1
-          lineHeight: 'normal', 
-          fontSize: '1.5rem'// Example line height for h1
+          fontWeight: 'bold',
+          lineHeight: 'normal',
+          fontSize: '1.5rem'
         },
       },
     },
   },
-  plugins: [ ],
+  plugins: [],
 })

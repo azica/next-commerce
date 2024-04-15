@@ -1,5 +1,4 @@
 "use client"
-
 import { Card, List } from '@material-tailwind/react'
 import { ReactNode } from 'react'
 

@@ -1,5 +1,4 @@
 "use client"
-
 import { IconButton, Typography } from "@material-tailwind/react"
 import { ArrowLeft, ArrowRight } from "akar-icons"
 import { motion } from "framer-motion";
@@ -11,6 +10,21 @@ import { useAllProducts } from "@/services/useProducts"
 
 import ProductCard from "./ProductCard"
 import Container from "../layout/Container"
+
+const breakpoints = {
+  420: {
+    slidesPerView: 2,
+    spaceBetween: 20,
+  },
+  640: {
+    slidesPerView: 3,
+    spaceBetween: 16,
+  },
+  1024: {
+    slidesPerView: 4,
+    spaceBetween: 16,
+  },
+}
 
 const ShopByCategories = () => {
   const { products } = useAllProducts<Model.Product[]>()
@@ -36,8 +50,11 @@ const ShopByCategories = () => {
       </div>
       <Swiper
         className="myswipe"
-        spaceBetween={16}
-        slidesPerView={4}
+        spaceBetween={0}
+        slidesPerView={1}
+        breakpoints={{
+          ...breakpoints
+        }}
         navigation={{
           nextEl: ".next",
           prevEl: ".prev"
@@ -57,7 +74,7 @@ const ShopByCategories = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-    </Container>
+    </Container >
   )
 }
 
