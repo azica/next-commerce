@@ -1,10 +1,9 @@
-import { AuthOptions, getServerSession } from "next-auth"
+import { AuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
 
 import { API_AUTH } from "@/shared/constants"
-import { getProfile, refreshAccessToken } from "@/shared/helpers/auth"
-
+import { getProfile } from "@/shared/helpers/auth"
 
 export const authConfig: AuthOptions = {
   providers: [
@@ -30,7 +29,7 @@ export const authConfig: AuthOptions = {
           const user = await res.json()
 
           if (!res.ok) {
-            throw new Error(user.message || "Signin is failed")
+            throw new Error(user.message || "Signing is failed")
           }
           const accessTokenExpires = Date.now() + (1 * 60 * 60 * 1000);
           return {
@@ -38,7 +37,7 @@ export const authConfig: AuthOptions = {
             accessTokenExpires
           }
         } catch (error: any) {
-          throw new Error(error.message || "Signin is failed")
+          throw new Error(error.message || "Signing is failed")
         }
       },
     }),
@@ -75,35 +74,25 @@ export const authConfig: AuthOptions = {
   pages: {
     signIn: "/signin"
   },
+  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async jwt({ token, user, account }) {
+    async jwt({ token, user }) {
+      if (token.access_token && token.refresh_token) {
+        const { access_token, refresh_token, profileData } = await getProfile(token.refresh_token as string, token.access_token as string)
+        return {
+          ...profileData,
+          access_token,
+          refresh_token,
+          accessTokenExpires: token.accessTokenExpires
+        }
 
-      if (token && typeof token.accessTokenExpires === 'number' && token.accessTokenExpires > Date.now()) {
-        return token; // Token is still valid, no need to refresh
-      }
-      const session = await getServerSession();
-      const accessToken = await refreshAccessToken(session?.user?.refresh_token as string);
-      if (accessToken) {
-        return {
-          ...token,
-          ...user,
-          accessToken,
-          accessTokenExpires: Date.now() + (1 * 60 * 60 * 1000)
-        };
-      } else {
-        return {
-          ...token,
-          ...user
-        };
       }
 
+      return { ...token, ...user };
     },
     async session({ session, token }) {
-      if (token && token.access_token) {
-        const user = await getProfile(token.access_token as string);
-        session.user = user;
-      }
-      console.log("token", session)
+      session.user = token as any;
+
       return session;
     },
   },

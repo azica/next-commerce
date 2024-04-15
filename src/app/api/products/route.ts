@@ -29,7 +29,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
     }
 
     const products = await response.json();
-    console.log(paramsArray)
+
     return NextResponse.json<Response.GetProducts>(products);
 
   } catch (error) {

@@ -10,7 +10,6 @@ export const useGetServerSession = async () => {
 
     try {
         const session = await getServerSession();
-        console.log("Session:", session);
         return session;
     } catch (error) {
         console.error("Error fetching session:", error);

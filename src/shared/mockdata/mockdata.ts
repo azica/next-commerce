@@ -1,4 +1,4 @@
-import { HomeAlt1, CreditCardAlt1, Receipt } from "akar-icons"
+import { HomeAlt1, CreditCardAlt1, Receipt, Person, Heart, ShippingBoxV1, Bell, Gear, Location } from "akar-icons"
 
 export const authData: Record<string, any> = {
   login: {
@@ -321,4 +321,34 @@ export const sortOptions = [
   { value: "newest", label: "Sort by newest" },
   { value: "a-b", label: "Sort by A - B" },
   { value: "b-a", label: "Sort by B - A" },
+]
+
+
+export const sideBar = [
+  { icon: Person, label: "Personal Information", link: "dashboard" },
+  { icon: ShippingBoxV1, label: "My Orders", link: "orders" },
+  { icon: Heart, label: "My WishList", link: "wishlist" },
+  { icon: Location, label: "Manage Addresses", link: "address" },
+  { icon: CreditCardAlt1, label: "Saved Cards", link: "cards" },
+  { icon: Bell, label: "Notifications", link: "notifications" },
+  { icon: Gear, label: "Settings", link: "settings" },
+
+]
+
+export const profileValues = [
+  {
+    id: 2,
+    value: "",
+    field: "mobileNumber",
+    placeholder: "Enter Mobile Number",
+    type: "tel",
+    required: true,
+    label: "Mobile Number",
+    autoComplete: "off",
+    validations: {
+      required: "Mobile number is required.",
+    },
+    className: "col-span-1",
+    mask: "+7 999 999 99 99",
+  },
 ]

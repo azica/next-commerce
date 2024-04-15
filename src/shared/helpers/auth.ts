@@ -1,19 +1,14 @@
-import { getServerSession } from "next-auth";
-import { JWT } from "next-auth/jwt";
-
-import { authConfig } from "@/configs/auth.config";
-
 import { API_AUTH } from "../constants";
 
-export const refreshAccessToken = async (refreshToken: string) => {
-
+export const refreshAccessToken = async (refresh_token: string) => {
+    console.log("refreshs", refresh_token)
     try {
         const response = await fetch(`${API_AUTH}/auth/refresh-token`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ refreshToken }),
+            body: JSON.stringify({ refreshToken: refresh_token }),
         });
 
         if (!response.ok) {
@@ -21,29 +16,44 @@ export const refreshAccessToken = async (refreshToken: string) => {
         }
 
         const refreshedTokens = await response.json();
-        return refreshedTokens.access_token;
+        return { access_token: refreshedTokens.access_token, refresh_token: refreshedTokens.refresh_token };
     } catch (error) {
         console.log("Error refreshing access token:", error);
         return { error: "RefreshAccess_tokenError" };
     }
-
-
 };
 
-export const getProfile = async (accessToken: string) => {
-    console.log(accessToken)
-    try {
-        const response = await fetch(`${API_AUTH}/auth/profile`, {
+export const getProfile = async (refresh_token: string, access_token: string) => {
+
+    let res = await fetch(`${API_AUTH}/auth/profile`, {
+        headers: {
+            Authorization: `Bearer ${access_token}`,
+        },
+    });
+
+    if (res.status === 401) {
+        const { access_token: newAccessToken, refresh_token: newRefreshToken } = await refreshAccessToken(refresh_token);
+
+        res = await fetch(`${API_AUTH}/auth/profile`, {
             headers: {
-                Authorization: `Bearer ${accessToken}`,
+                Authorization: `Bearer ${newAccessToken}`,
             },
         });
-        if (!response.ok) {
-            throw new Error("Failed to fetch user profile");
+
+        if (res.ok) {
+            const profileData = await res.json();
+            return { access_token: newAccessToken, refresh_token: newRefreshToken, profileData };
+        } else {
+            console.error("Failed to fetch profile data after token refresh");
+            return { error: "FetchProfileDataError" };
         }
-        return await response.json();
-    } catch (error) {
-        console.error("Error fetching user profile:", error);
-        return null;
+    }
+
+    if (res.ok) {
+        const profileData = await res.json();
+        return { access_token, refresh_token, profileData };
+    } else {
+        console.error("Failed to fetch profile data");
+        return { error: "FetchProfileDataError" };
     }
 };

@@ -1,6 +1,7 @@
 "use client"
 import { Button, Card, CardBody, Typography } from "@material-tailwind/react"
 import Image from "next/image"
+import { toast } from "react-toastify"
 
 import SocialLinks from "./SocialLinks"
 
@@ -26,6 +27,7 @@ const ProductCard = ({
     }
 
     localStorage.setItem("cartList", JSON.stringify(cartList))
+    toast.info(`${title} added to cart!`);
   }
 
   return (

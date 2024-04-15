@@ -9,8 +9,8 @@ import Container from "./Container"
 import HeaderActions from "./HeaderActions"
 
 const menu = [
-  { href: "/", label: "Home" },
   { href: "/shop", label: "Shop" },
+  { href: "/admin", label: "Admin" },
   { href: "/our-story", label: " Our Story" },
   { href: "/blog", label: "Blog" },
   { href: "/contact-us", label: "Contact Us" },
@@ -18,7 +18,7 @@ const menu = [
 const Header = () => {
 
   const pathname = usePathname()
-  const showHeader = pathname === "/signin"
+  const showHeader = pathname === "/signin";
   if (showHeader) {
     return null
   }

@@ -1,6 +1,6 @@
 "use client"
 import { Button, IconButton } from "@material-tailwind/react"
-import { Cart, Heart, Search as SearchIcon } from "akar-icons"
+import { Cart, Heart, Person, Search as SearchIcon } from "akar-icons"
 import { signOut, useSession, signIn } from "next-auth/react"
 import { useEffect, useState } from "react"
 
@@ -10,28 +10,10 @@ import { getProfile } from "@/shared/helpers/auth"
 import Search from "../blocks/Search"
 import Modal from "../ui/Modal"
 
-
 const HeaderActions = () => {
-  const { data: session, update } = useSession()
+  const { data: session, status } = useSession()
 
-  // useEffect(() => {
-  //   const fetchProfile = async () => {
-  //     try {
-  //       if (session?.error === "RefreshAccessTokenError") {
-  //         signIn();
-  //       }
-  //       if (!session?.user) {
-  //         const user = await getProfile(); // Call getProfile function to fetch user profile
-  //         update({ user }); // Update session with fetched user data
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching user profile:", error);
-  //     }
-  //   };
-
-  //   fetchProfile(); // Call the asynchronous function to fetch user profile
-  // }, [session, update]);
-  console.log(session)
+  console.log("header", session)
 
   const [showCart, setShowCart] = useState(false)
   const [showSearchBar, setShowSearchBar] = useState(false)
@@ -82,19 +64,25 @@ const HeaderActions = () => {
   ]
 
   return (
-    <div className="flex gap-3">
+    <div className="flex gap-3 items-center">
       {actions.map((button, idx) => (
         <IconButton key={idx} className="bg-transparent shadow-none" onClick={button.handle}>
           {button.icon}
         </IconButton>
       ))}
       <CartDrawer open={showCart} toggleDrawer={toggleDrawer} />
-      {session === null || session === undefined ? (
+      {session && session.user ? (
+        <div className="flex gap-1 items-center">
+          <p>Hi {session.user.name}</p>
+          <Person strokeWidth={1.5} size={20} />
+        </div>
+      ) : null}
+      {!session ? (
         <a href="/signin">
-          <Button>Sing In</Button>
+          <Button>Sign In</Button>
         </a>
       ) : (
-        <Button onClick={() => signOut({ callbackUrl: "/" })}>Sing Out</Button>
+        <Button onClick={() => signOut({ callbackUrl: "/" })}>Sign Out</Button>
       )}
       <Modal open={showSearchBar} handleOpen={() => setShowSearchBar(!showSearchBar)}>
         <Search handleOpen={() => setShowSearchBar(!showSearchBar)} />

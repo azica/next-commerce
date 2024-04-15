@@ -3,7 +3,7 @@
 import { Input, Checkbox, Button, Typography, Spinner } from "@material-tailwind/react"
 import { EyeSlashed, EyeOpen } from "akar-icons"
 import { useRouter } from "next/navigation"
-import { signIn } from "next-auth/react"
+import { signIn, useSession } from "next-auth/react"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { toast } from 'react-toastify';
@@ -50,7 +50,6 @@ const AuthForm: AuthForm = ({ hasAccount, setHasAccount, inputs, buttonText, set
       } else {
         toast.error(`${response?.error} "Please try again."`);
       }
-
     } catch (error) {
       toast.error('An error occurred. Please try again.');
     } finally {

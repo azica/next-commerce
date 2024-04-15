@@ -9,8 +9,6 @@ export const useSearchedProducts = <T>({ limit }: { limit?: string } = {}) => {
 
     const currentQueryString = getQueryString(searchParams, limit);
 
-    console.log(currentQueryString)
-
     const { data, error, isLoading }: SWRResponse<unknown, ErrorResponse> = useSWR(
         `/api/products/search/?${currentQueryString}`,
         fetcher,

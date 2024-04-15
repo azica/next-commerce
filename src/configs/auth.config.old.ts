@@ -1,10 +1,12 @@
-import { AuthOptions } from "next-auth"
+import { AuthOptions, getServerSession } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
 
 import { API_AUTH } from "@/shared/constants"
+import { getProfile, refreshAccessToken } from "@/shared/helpers/auth"
 
-export const authOldConfig: AuthOptions = {
+
+export const authConfig: AuthOptions = {
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -28,11 +30,15 @@ export const authOldConfig: AuthOptions = {
                     const user = await res.json()
 
                     if (!res.ok) {
-                        throw new Error(user.message || "Signup is failed")
+                        throw new Error(user.message || "Signing is failed")
                     }
-                    return user
+                    const accessTokenExpires = Date.now() + (1 * 60 * 60 * 1000);
+                    return {
+                        ...user,
+                        accessTokenExpires
+                    }
                 } catch (error: any) {
-                    throw new Error(error.message || "Signup is failed")
+                    throw new Error(error.message || "Signing is failed")
                 }
             },
         }),
@@ -69,54 +75,49 @@ export const authOldConfig: AuthOptions = {
     pages: {
         signIn: "/signin"
     },
+    secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
         async jwt({ token, user, account }) {
+
+            // if (token.access_token && !token?.role) {
+            //   const userProfile = await getProfile(token.access_token as string);
+            //   return {
+            //     ...token,
+            //     ...userProfile,
+            //     accessToken: token.access_token,
+            //     refreshToken: token.refresh_token
+            //   }
+            // }
+
+            // if (token && typeof token.accessTokenExpires === 'number' && token.accessTokenExpires > Date.now()) {
+            //   return token;
+            // }
+
+            // const session = await getServerSession();
+            // console.log("server session", session)
+            // const accessToken = await refreshAccessToken(session?.refreshToken as string);
+            // if (accessToken) {
+            //   return {
+            //     ...token,
+            //     ...user,
+            //     accessToken,
+            //     accessTokenExpires: Date.now() + (1 * 60 * 60 * 1000)
+            //   };
+            // } else {
+            //   return {
+            //     ...token,
+            //     ...user,
+            //     accessToken: session?.accessToken,
+            //     refreshToken: session?.refreshToken
+            //   };
+            // }
             return { ...token, ...user };
-            // if (user && token && Math.floor(Date.now() / 1000) > (account?.expires_at || token.exp - 60)) {
-            //   try {
-            //     const res = await fetch(`${API_AUTH}/auth/refresh-token`, {
-            //       method: 'POST',
-            //       headers: {
-            //         "Content-Type": "application/json",
-            //       },
-            //       body: JSON.stringify({ refreshToken: token.refreshToken }),
-            //     })
-            //     const data = await res.json()
-            //     console.log("refresh", data)
-            //     if (res.ok && data) {
-            //       // Update the token with the refreshed one
-            //       return {
-            //         ...token,
-            //         ...data
-            //       }
-            //     }
-            //   } catch (error) {
-
-            //     console.error("Error refreshing token:", error)
-            //   }
-            // }
-            // return token
         },
-        async session({ session, token }) {
-            // if (token) {
-            //   try {
-            //     console.log("token", token)
-            //     const res = await fetch(`${API_AUTH}/auth/profile`, {
-            //       headers: {k
-            //         Authorization: `Bearer ${token.accessToen}`,
-            //       },
-            //     });
-
-            //     const userProfile = await res.json();
-            //     console.log(userProfile)
-            //     session.user = userProfile;
-
-            //   } catch (error) {
-            //     console.error("Error fetching user profile:", error);
-            //   }
-            // }
-            //   session.user = token;
+        async session({ session, token, user }) {
+            console.log("session", token)
+            session.user = token as any;
             return session;
         },
-    }
+    },
 }
+

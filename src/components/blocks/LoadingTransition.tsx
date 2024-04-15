@@ -18,7 +18,6 @@ const LoadingTransition = ({ children }: { children: ReactNode }) => {
     return () => clearTimeout(timer);
   }, [pathname]);
 
-  console.log(pathname)
   return (
     <AnimatePresence>
       {isLoading ? (
